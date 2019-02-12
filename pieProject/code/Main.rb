@@ -1,6 +1,5 @@
 $LOAD_PATH << '.'
 
-require 'fox16'
 require 'Canvas.rb'
 require 'BrushPanel.rb'
 
