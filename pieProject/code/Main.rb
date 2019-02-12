@@ -3,10 +3,12 @@ $LOAD_PATH << '.'
 require 'fox16'
 require 'Canvas.rb'
 
+require 'fox16'
+ master
+
 include Fox
 
 class EditorWindow < FXMainWindow
-  
   def initialize(app)
     super(app, "Pixel Image Editor", :width => 1080, :height => 720)
   end

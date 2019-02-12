@@ -1,4 +1,5 @@
 $LOAD_PATH << '.'
+
 require 'fox16'
 
 include Fox
@@ -18,3 +19,10 @@ class RastorMap < FXBitmap #Creates and initializes a bitmap that stores the pix
     self.fill(Fox.FXRGB(248, 248, 255))
   end  
 end
+
+class Canvas < FXBitmap
+  def initialize(app)
+    super
+  end
+ end
+
