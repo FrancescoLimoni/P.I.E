@@ -1,7 +1,11 @@
 $LOAD_PATH << '.'
 
 require 'fox16'
+require 'Canvas.rb'
 require 'BrushPanel.rb'
+
+require 'fox16'
+
 
 include Fox
 
@@ -20,7 +24,8 @@ end
 if __FILE__ == $0
   FXApp.new do |app|
     editor_window = EditorWindow.new(app)
-    BrushPanel.new(editor_window,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
+    draw = Canvas.new(editor_window, app, FRAME_THICK, 1000, 500, 100, 100, 0, 0, 0, 0)
+    brush_window = BrushPanel.new(editor_window,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
     FXToolTip.new(app)
     app.create
     app.run
