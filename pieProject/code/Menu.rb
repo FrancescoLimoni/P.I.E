@@ -24,7 +24,7 @@ def addMenuBar
   
   #connect sub menue Items to functions
   newCmd.connect(SEL_COMMAND) do
-      @txt.text = ""
+      #@txt.text = ""
   end
 
   loadCmd.connect(SEL_COMMAND) do  
