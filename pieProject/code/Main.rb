@@ -2,7 +2,7 @@ $LOAD_PATH << '.'
 
 require 'Canvas.rb'
 require 'BrushPanel.rb'
-
+require 'Menu'
 require 'fox16'
 
 
@@ -11,6 +11,7 @@ include Fox
 class EditorWindow < FXMainWindow
   def initialize(app)
     super(app, "Pixel Image Editor", :width => 500, :height => 500)
+    addMenuBar
   end
   
   def create
