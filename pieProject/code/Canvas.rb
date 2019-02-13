@@ -20,9 +20,3 @@ class RastorMap < FXBitmap #Creates and initializes a bitmap that stores the pix
   end  
 end
 
-class Canvas < FXBitmap
-  def initialize(app)
-    super
-  end
- end
-
