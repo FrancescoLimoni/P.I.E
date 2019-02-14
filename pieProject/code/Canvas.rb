@@ -1,3 +1,4 @@
+
 $LOAD_PATH << '.'
 
 require 'fox16'
