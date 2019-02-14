@@ -54,3 +54,4 @@ class ColorPanel < FXScrollWindow
       end
     end
 end
+

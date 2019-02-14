@@ -33,6 +33,6 @@ class BrushPanel < FXScrollWindow
     rescue
       raise RuntimeError, "Couldn't load icon: #{filename}"
     end
-  end
-  
+  end  
  end
+
