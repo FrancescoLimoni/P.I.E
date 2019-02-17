@@ -12,7 +12,8 @@ include Fox
 class EditorWindow < FXMainWindow
   def initialize(app)
     super(app, "Pixel Image Editor", :width => 700, :height => 700)
-    addMenuBar
+    #addMenuBar
+    menuBar = MenuBar.new(self, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
   end
   
   def create
