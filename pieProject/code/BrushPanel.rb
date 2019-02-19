@@ -6,9 +6,14 @@ class BrushPanel < FXScrollWindow
   def initialize(parent,opts,x,y,width,height)
     super
     
+    #Upload PNG images to be used# 
+    
     b1 = loadIcon("BrushIcon1.png")
     b2 = loadIcon("BrushIcon2.png")
     b3 = loadIcon("BrushIcon3.png")
+#   b4 = loadIcon("BrushIcon4.png")
+
+    #Display images as clickable buttons#
 
     vframe = FXGroupBox.new(self, "Brush Size", GROUPBOX_TITLE_CENTER|FRAME_RIDGE)
     brush1 = FXButton.new(vframe, "\t1 x 1", b1, :opts => LAYOUT_CENTER_X)
@@ -20,6 +25,10 @@ class BrushPanel < FXScrollWindow
     brush3 = FXButton.new(vframe, "\t3 x 3", b3, :opts => LAYOUT_CENTER_X)
       brush3.buttonStyle |= BUTTON_TOOLBAR
       brush3.frameStyle = FRAME_RAISED
+#   brush4 = FXButton.new(vframe, "\tfill", b4, :opts => LAYOUT_CENTER_X)
+#     brush4.buttonStyle |= BUTTON_TOOLBAR
+#     brush4.frameStyle = FRAME_RAISED
+
   end
   
   def loadIcon(filename)
