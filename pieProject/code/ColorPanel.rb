@@ -41,7 +41,6 @@ class ColorPanel < FXScrollWindow
     customBtn.frameStyle  = FRAME_RAISED
   end
   
-  
   # loadIcon: finds and loads a .png
   def loadIcon(filename)
       begin
