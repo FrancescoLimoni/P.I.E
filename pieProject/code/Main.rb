@@ -11,8 +11,8 @@ require 'FloatingToolBar.rb'
 include Fox
 
 class EditorWindow < FXMainWindow
-  def initialize(app)
-    super(app, "Pixel Image Editor", :width => 700, :height => 700)
+  def initialize(app,logo)
+    super(app, "Pixel Image Editor", logo, :width => 700, :height => 700)
     #addMenuBar
     menuBar = MenuBar.new(self, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
   end
@@ -21,13 +21,22 @@ class EditorWindow < FXMainWindow
     super
     show(PLACEMENT_SCREEN)
   end
+
 end
 
 
 if __FILE__ == $0
   FXApp.new do |app|
 
-    editor_window = EditorWindow.new(app)
+    #load pie icon
+    icon = nil
+    File.open("icons/pie.png", "rb") do |io|
+      icon = FXPNGIcon.new(app, io.read)
+    end
+    icon
+
+    #call editor_window constructor
+    editor_window = EditorWindow.new(app,icon)
 
     #adding floating ui to this brush_tool_bar
     brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT,0,0,0)
@@ -45,4 +54,3 @@ if __FILE__ == $0
     app.run
   end
 end
-
