@@ -17,9 +17,9 @@ class MenuBar
         #create sub menue Items=================================================
 
             #under 'File' tab 
-        newCmd = FXMenuCommand.new(fileMenu, "new")
+        newCmd = FXMenuCommand.new(fileMenu, "New")
         loadCmd = FXMenuCommand.new(fileMenu, "Load")
-        saveCmd = FXMenuCommand.new(fileMenu, "save") 
+        saveCmd = FXMenuCommand.new(fileMenu, "Save") 
         exitCmd = FXMenuCommand.new(fileMenu, "Exit")
 
             #under 'About' tab
