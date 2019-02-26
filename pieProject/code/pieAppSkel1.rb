@@ -10,12 +10,12 @@ class PIEskel1 < FXMainWindow
     super(app, title, :width => w, :height => h) 
 
       #create box effect
-      packer = FXPacker.new(self, :opts => LAYOUT_FILL) #layout parent
+      packer = FXPacker.new(self, :opts => LAYOUT_FILL) #LayerPanel parent
       groupBoxH = FXGroupBox.new(packer, nil, :opts => FRAME_RIDGE | LAYOUT_FILL_X)
       groupBoxV = FXGroupBox.new(packer, nil, :opts => FRAME_RIDGE | GROUPBOX_NORMAL)
    
       
-      #layout setup  
+      #LayerPanel setup
       hFrame1 = FXHorizontalFrame.new(groupBoxH)
       vFrame1 = FXVerticalFrame.new(groupBoxV)
 
@@ -46,7 +46,7 @@ class PIEskel1 < FXMainWindow
 
   # menu system (with pull-down menus)
   def addMenuBar(layout)  
-    # set up menu layout properties
+    # set up menu LayerPanel properties
     menuBar = FXMenuBar.new(layout, LAYOUT_SIDE_TOP | LAYOUT_FILL_X)  
         # create pointers (to link new 'FXMenuPane' wutg a new 'FXMenuTitle')
     fileMenu = FXMenuPane.new(layout)  #self refers to the TextEditor window

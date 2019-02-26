@@ -7,12 +7,13 @@ require 'Menu'
 require 'fox16'
 require 'ColorPanel.rb'
 require 'FloatingToolBar.rb'
+require 'layerPanel.rb'
 
 include Fox
 
 class EditorWindow < FXMainWindow
   def initialize(app,logo)
-    super(app, "Pixel Image Editor", logo, :width => 700, :height => 700)
+    super(app, "LayerPanel", logo, logo, :width => 700, :height => 700)
     #addMenuBar
     menuBar = MenuBar.new(self, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
   end
@@ -46,9 +47,14 @@ if __FILE__ == $0
     #adding empty dock for all toolbar objects
     color_tool_bar.addDock(LAYOUT_SIDE_RIGHT,0,0,0)
 
+    #adding floating ui to layerPanel
+
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
     draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250, 0, 0, 0, 0)
     color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
+
+    layerPanel = LayerPanel.new(editor_window, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
+
     FXToolTip.new(app)
     app.create
     app.run

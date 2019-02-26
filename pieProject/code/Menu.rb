@@ -2,7 +2,7 @@ class MenuBar
     def initialize(x,y,z)
         puts "creating menu bar"
   
-        # set up menu layout properties ======================================
+        # set up menu LayerPanel properties ======================================
 
         menuBar = FXMenuBar.new(x, y | z)  
             # create pointers (to link new 'FXMenuPane' wutg a new 'FXMenuTitle')

@@ -1,6 +1,6 @@
 class FloatingToolBar 
     #param scope: class of main window
-    #param x,y,z,r layout of toolbar
+    #param x,y,z,r LayerPanel of toolbar
     def initialize(scope,x,y,z,r)
   
       tool_bar_shell = FXToolBarShell.new(scope) 
