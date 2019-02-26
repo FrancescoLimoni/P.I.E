@@ -3,7 +3,7 @@
 require 'fox16'
 include Fox
 
-class ColorPanel < FXScrollWindow
+class ColorPanel < FXPacker
   def initialize(p, opts, x, y, width, height)
     super(p, opts, x, y, width, height)
     

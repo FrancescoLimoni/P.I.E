@@ -1,7 +1,7 @@
 require 'fox16'
 include Fox
 
-class LayerPanel < FXScrollWindow
+class LayerPanel < FXPacker
 
   def initialize(p, opts, x, y, width, height)
     super(p,  opts, x, y, width, height)

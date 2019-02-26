@@ -2,7 +2,7 @@ require 'fox16'
 
 include Fox
 
-class BrushPanel < FXScrollWindow
+class BrushPanel < FXPacker
   def initialize(parent,opts,x,y,width,height)
     super
     
