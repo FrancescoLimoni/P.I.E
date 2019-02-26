@@ -7,6 +7,12 @@ class ColorPanel < FXScrollWindow
   def initialize(p, opts, x, y, width, height)
     super(p, opts, x, y, width, height)
     
+    matrix = FXMatrix.new(self, 3, :opts => MATRIX_BY_ROWS|LAYOUT_FILL)
+    
+    1.upto(12) do |i|
+          FXButton.new(matrix, "#{i}")
+        end
+    
     #Create 'Color Picker' box to hold buttons
     groupBoxH = FXGroupBox.new(self, "Color Picker", GROUPBOX_TITLE_CENTER | FRAME_RIDGE) 
     hFrame = FXHorizontalFrame.new(groupBoxH)
@@ -41,7 +47,7 @@ class ColorPanel < FXScrollWindow
     customBtn.frameStyle  = FRAME_RAISED
   end
   
-  # loadIcon: finds and loads a .png
+  #loadIcon: finds and loads a .png
   def loadIcon(filename)
       begin
         filename = File.join("icons", filename)
@@ -55,4 +61,3 @@ class ColorPanel < FXScrollWindow
       end
     end
 end
-
