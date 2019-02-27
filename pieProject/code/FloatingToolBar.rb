@@ -3,7 +3,7 @@ class FloatingToolBar
     #param x,y,z,r LayerPanel of toolbar
     def initialize(scope,x,y,z,r)
   
-      tool_bar_shell = FXToolBarShell.new(scope) 
+      tool_bar_shell = FXToolBarShell.new(scope)
   
       #scope for where to place FloatingToolBar object
       @Scope = scope
@@ -11,11 +11,11 @@ class FloatingToolBar
       # dock sites that provide places for the toolbar to land when it’s ready to come back home
       # The user can drag the floating toolbar to either of these positions on
       # the main window, and it will reattach itself (dock) there.
-      top_dock_site = FXDockSite.new(scope,      
+      defult_dock_site = FXDockSite.new(scope,      
         :opts => x|y|z|r)
   
       # creating the tool bar
-      @tool_bar = FXToolBar.new(top_dock_site, tool_bar_shell,
+      @tool_bar = FXToolBar.new(defult_dock_site, tool_bar_shell,
         :opts => PACK_UNIFORM_WIDTH|FRAME_RAISED|LAYOUT_FILL_X)
   
       #a “grip,” a handle that the user can grab to tear the toolbar away from the dock site

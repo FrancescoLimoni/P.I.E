@@ -5,14 +5,18 @@ class MenuBar
         # set up menu LayerPanel properties ======================================
 
         menuBar = FXMenuBar.new(x, y | z)  
+        menuBar.backColor = "Gray69"
             # create pointers (to link new 'FXMenuPane' wutg a new 'FXMenuTitle')
         fileMenu = FXMenuPane.new(x)  #self refers to the TextEditor window
         about = FXMenuPane.new(x)  #self refers to the TextEditor window
 
         #create main menu Items ================================================
 
-        FXMenuTitle.new(menuBar, "File", :popupMenu => fileMenu)  
-        FXMenuTitle.new(menuBar, "About", :popupMenu => about) 
+        fileTab = FXMenuTitle.new(menuBar, "File", :popupMenu => fileMenu)  
+        fileTab.backColor = "Gray69"
+    
+        aboutTab = FXMenuTitle.new(menuBar, "About", :popupMenu => about) 
+        aboutTab.backColor = "Gray69"
 
         #create sub menue Items=================================================
 

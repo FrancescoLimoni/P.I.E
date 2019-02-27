@@ -36,13 +36,23 @@ if __FILE__ == $0
     end
     icon
 
+     #load pie icon as a splash
+     iconSplash = nil
+     File.open("icons/pie.png", "rb") do |io|
+       iconSplash = FXPNGImage.new(app, io.read)
+     end
+     iconSplash
+
+     
+
     #call editor_window constructor
     editor_window = EditorWindow.new(app,icon)
+    editor_window.backColor = "Gray20"
 
     #adding floating ui to this brush_tool_bar
     brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT,0,0,0)
 
-    #adding floating ui to this brush_tool_bar
+   #adding floating ui to layerPanel
     layer_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_RIGHT,0,0,0)
 
     #adding floating ui to color_window
@@ -50,13 +60,17 @@ if __FILE__ == $0
     #adding empty dock for all toolbar objects
     color_tool_bar.addDock(LAYOUT_SIDE_RIGHT,0,0,0)
 
-    #adding floating ui to layerPanel
-
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
-    draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250, 0, 0, 0, 0)
-    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
+    brush_window.backColor = "Gray69"
 
+    draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250, 0, 0, 0, 0)
+    draw.backColor = "Gray69"
+
+    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
+    color_window.backColor = "Gray69"
+    
     layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
+    layerPanel.backColor = "Gray69"
 
     FXToolTip.new(app)
     app.create

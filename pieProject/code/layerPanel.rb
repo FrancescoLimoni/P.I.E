@@ -7,9 +7,13 @@ class LayerPanel < FXPacker
     super(p,  opts, x, y, width, height)
 
     packer = FXPacker.new(self, opts =  LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT)
+    packer.backColor = "Gray69"
+
     packerCustomization(packer)
     gruopBox = FXGroupBox.new(packer, "Layer", :opts => GROUPBOX_TITLE_CENTER|FRAME_RIDGE)
+    gruopBox.backColor = "Gray69"
     frameV = FXVerticalFrame.new(gruopBox, :opts => LAYOUT_SIDE_BOTTOM)
+    frameV.backColor = "Gray69"
     button = FXButton.new(frameV, "+", :opts => BUTTON_NORMAL|LAYOUT_RIGHT)
 
     @layers = Array.new()

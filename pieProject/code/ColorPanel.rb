@@ -9,7 +9,9 @@ class ColorPanel < FXPacker
     
     #Create 'Color Picker' box to hold buttons
     groupBoxH = FXGroupBox.new(self, "Color Picker", GROUPBOX_TITLE_CENTER | FRAME_RIDGE) 
+    groupBoxH.backColor = "Gray69"
     hFrame = FXHorizontalFrame.new(groupBoxH)
+    hFrame.backColor = "Gray69"
 
     createButtons(hFrame) #Draws Buttons for color selection
   end
