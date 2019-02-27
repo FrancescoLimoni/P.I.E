@@ -15,7 +15,8 @@ class EditorWindow < FXMainWindow
   def initialize(app,logo)
     super(app, "LayerPanel", logo, logo, :width => 700, :height => 700)
     #addMenuBar
-    menuBar = MenuBar.new(self, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
+    floating_menu_bar = FloatingToolBar.new(self,LAYOUT_SIDE_TOP,LAYOUT_FILL_X,0,0)
+    menuBar = MenuBar.new(app, floating_menu_bar.getToolBar, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
   end
   
   def create
