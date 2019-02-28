@@ -8,6 +8,7 @@ class ColorPanel < FXScrollWindow
     super(p, opts, x, y, width, height)
     
     matrix = FXMatrix.new(self, 3, :opts => MATRIX_BY_ROWS|LAYOUT_FILL)
+    matrix.backcolor = "red"
     
     1.upto(12) do |i|
           FXButton.new(matrix, "#{i}")
