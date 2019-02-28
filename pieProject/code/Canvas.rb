@@ -24,6 +24,7 @@ class Canvas
     @dirty = false     
   end
   self.instance_variables
+
 #self.connect(SEL_PAINT) do |sender, sel, event|
   
 end
