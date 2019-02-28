@@ -1,4 +1,5 @@
 
+
 $LOAD_PATH << '.'
 
 require 'Canvas.rb'
@@ -64,9 +65,14 @@ if __FILE__ == $0
     brush_window.backColor = "Gray69"
     splash_screen.addHideElement(brush_window,editor_window)
 
-    draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250, 0, 0, 0, 0)
-    draw.backColor = "Gray69"
-    splash_screen.addHideElement(draw,editor_window)
+    #old code:-
+    #draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250,0, 0, 0, 0, 0)
+    #draw.backColor = "Gray69"
+    #splash_screen.addHideElement(draw,editor_window)
+
+    #new code: -
+    #canvas_window = Canvas.new(editor_window, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
+    #splash_screen.addHideElement(canvas_window,editor_window)
 
     color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
     color_window.backColor = "Gray69"
