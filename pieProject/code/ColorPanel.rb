@@ -3,13 +3,15 @@
 require 'fox16'
 include Fox
 
-class ColorPanel < FXScrollWindow
+class ColorPanel < FXPacker
   def initialize(p, opts, x, y, width, height)
     super(p, opts, x, y, width, height)
     
     #Create 'Color Picker' box to hold buttons
     groupBoxH = FXGroupBox.new(self, "Color Picker", GROUPBOX_TITLE_CENTER | FRAME_RIDGE) 
+    groupBoxH.backColor = "Gray69"
     hFrame = FXHorizontalFrame.new(groupBoxH)
+    hFrame.backColor = "Gray69"
 
     createButtons(hFrame) #Draws Buttons for color selection
   end

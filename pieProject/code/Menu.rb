@@ -1,56 +1,90 @@
-#no need to require libraries since all libraries will be ...
-#...called from main
-
-# menu system (with pull-down menus)
-def addMenuBar  
-  # set up menu layout properties
-  menuBar = FXMenuBar.new(self, LAYOUT_SIDE_TOP | LAYOUT_FILL_X)  
-      # create pointers (to link new 'FXMenuPane' wutg a new 'FXMenuTitle')
-  fileMenu = FXMenuPane.new(self)  #self refers to the TextEditor window
-  about = FXMenuPane.new(self)  #self refers to the TextEditor window
-
-  #create main menu Items
-  FXMenuTitle.new(menuBar, "File", :popupMenu => fileMenu)  
-  FXMenuTitle.new(menuBar, "About", :popupMenu => about) 
-
-  #create sub menue Items
-      #under 'File' tab 
-  newCmd = FXMenuCommand.new(fileMenu, "new")
-  loadCmd = FXMenuCommand.new(fileMenu, "Load")
-  saveCmd = FXMenuCommand.new(fileMenu, "save") 
-  exitCmd = FXMenuCommand.new(fileMenu, "Exit")
-      #under 'About' tab
-  aboutCmd = FXMenuCommand.new(about, "contact us") 
+class MenuBar
+    def initialize(app,x,y,z)
+        puts "creating menu bar"
   
-  #connect sub menue Items to functions
-  newCmd.connect(SEL_COMMAND) do
-      #@txt.text = ""
-  end
+        # set up menu LayerPanel properties ======================================
 
-  loadCmd.connect(SEL_COMMAND) do  
-      dialog = FXFileDialog.new(self, "Load a File") 
-      dialog.selectMode = SELECTFILE_EXISTING 
-      dialog.patternList = ["All Files (*)"]  
-      if dialog.execute != 0  
-       load_file(dialog.filename)  
-      end   
-  end  
+        menuBar = FXMenuBar.new(x, y | z)  
+        menuBar.backColor = "Gray69"
+            # create pointers (to link new 'FXMenuPane' wutg a new 'FXMenuTitle')
+        fileMenu = FXMenuPane.new(x)  #self refers to the TextEditor window
+        about = FXMenuPane.new(x)  #self refers to the TextEditor window
 
-  saveCmd.connect(SEL_COMMAND) do
-      dialog = FXFileDialog.new(self, "Save a File")  
-      dialog.selectMode = SELECTFILE_EXISTING  
-      dialog.patternList = ["All Files (*)"]  
-      if dialog.execute != 0  
-        save_file(dialog.filename)  
-      end
-  end
+        #load icons functions ==================================================
+        def readIcon(scope,path)
+            icon = nil
+            File.open(path, "rb") do |io|
+            icon = FXPNGIcon.new(scope, io.read)
+            icon.scale(25,25)
+            end
+            icon
+        end
 
-  exitCmd.connect(SEL_COMMAND) do
-      exit
-  end
+        #create main menu Items ================================================
+        
+        fileTab = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/pie.png"), :popupMenu => fileMenu)  
+        fileTab.backColor = "Gray69"
 
-  aboutCmd.connect(SEL_COMMAND) do
-      # ...
-  end
-  
-end 
+        fileNew = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filenew.png"), :popupMenu => nil)  
+        fileNew.backColor = "Gray69"
+
+        fileLoad = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/fileopen.png"), :popupMenu => nil)  
+        fileLoad.backColor = "Gray69"
+
+        fileSave = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filesave.png"), :popupMenu => nil)  
+        fileSave.backColor = "Gray69"
+
+        fileSave_s = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filesaves.png"), :popupMenu => nil)  
+        fileSave_s.backColor = "Gray69"
+
+        aboutTab = FXMenuTitle.new(menuBar, "About", :popupMenu => about, :opts => LAYOUT_CENTER_Y) 
+        aboutTab.backColor = "Gray69"
+
+
+        #create sub menue Items=================================================
+
+            #under 'File' tab 
+        newCmd = FXMenuCommand.new(fileMenu, "New")
+        loadCmd = FXMenuCommand.new(fileMenu, "Load")
+        saveCmd = FXMenuCommand.new(fileMenu, "Save") 
+        exitCmd = FXMenuCommand.new(fileMenu, "Exit")
+
+            #under 'About' tab
+        aboutCmd = FXMenuCommand.new(about, "contact us") 
+        
+        #connect sub menue Items to functions =====================================
+
+        newCmd.connect(SEL_COMMAND) do
+            #@txt.text = ""
+        end
+        #**************************************************************************
+        loadCmd.connect(SEL_COMMAND) do  
+            dialog = FXFileDialog.new(x, "Load a File") 
+            dialog.selectMode = SELECTFILE_EXISTING 
+            dialog.patternList = ["All Files (*)"]  
+            if dialog.execute != 0  
+            load_file(dialog.filename)  
+            end   
+        end  
+        #**************************************************************************
+        saveCmd.connect(SEL_COMMAND) do
+            dialog = FXFileDialog.new(x, "Save a File")  
+            dialog.selectMode = SELECTFILE_EXISTING  
+            dialog.patternList = ["All Files (*)"]  
+            if dialog.execute != 0  
+                save_file(dialog.filename)  
+            end
+        end
+        #**************************************************************************
+        exitCmd.connect(SEL_COMMAND) do
+            puts "exiting program"
+            exit
+        end
+        #**************************************************************************
+        aboutCmd.connect(SEL_COMMAND) do
+            # ...
+        end
+    
+    end 
+
+end
