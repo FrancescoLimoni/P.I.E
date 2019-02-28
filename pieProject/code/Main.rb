@@ -1,5 +1,3 @@
-
-
 $LOAD_PATH << '.'
 
 require 'Canvas.rb'
