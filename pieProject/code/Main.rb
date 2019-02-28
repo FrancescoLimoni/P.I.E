@@ -1,4 +1,5 @@
 
+
 $LOAD_PATH << '.'
 
 require 'Canvas.rb'
@@ -63,9 +64,7 @@ if __FILE__ == $0
 
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
     brush_window.backColor = "Gray69"
-
-    draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250, 0, 0, 0, 0)
-    draw.backColor = "Gray69"
+    canvas_window = Canvas.new(editor_window, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
 
     color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
     color_window.backColor = "Gray69"

@@ -1,23 +1,29 @@
-
 $LOAD_PATH << '.'
-
 require 'fox16'
 
 include Fox
 
-class Canvas < FXBitmapFrame #Bitmap class that acts as a container for the bitmap.
+class Canvas
   
-  def initialize(p, app, opt, x, y, width, height, padLeft, padRight, padTop, padBottom)
-    map = RastorMap.new(app, width, height) #Creates a temporary rastor(Bitmap) object that is used to initizalize the Bitmap Frame.
-    super(p, map, opt, x, y, width, height, padLeft, padRight, padTop, padBottom)
+  attr_reader :contents, :canvas_frame, :drawColor, :mouseDown, :dirty, :canvas, :dc
+  attr_writer :drawColor, :mouseDown, :dirty
+  
+  def initialize(p, opts, x, y, width, height, padLeft, padRight, padTop, padBottom)
+    @contents = FXHorizontalFrame.new(p, opts, x, y, width, height,
+     padLeft, padRight, padTop, padBottom)
+     
+    @canvas_frame = FXVerticalFrame.new(@contents,FRAME_SUNKEN|LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 
+    0, 0, 0, 0, 10, 10, 10, 10) 
+    
+    @canvas = FXCanvas.new(@canvas_frame, nil, 0, LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 0, 0, 0, 0,) 
+  
+  
+  
+    @drawColor = FXRGB(255, 0, 0)
+    @mouseDown = false
+    @dirty = false     
   end
-end
-
-class RastorMap < FXBitmap #Creates and initializes a bitmap that stores the pixel values for the drawn canvas.
+  self.instance_variables
+#self.connect(SEL_PAINT) do |sender, sel, event|
   
-  def initialize(app, w, h)
-    super(app, nil, 0, w, h)
-    self.fill(Fox.FXRGB(248, 248, 255))
-  end  
 end
-
