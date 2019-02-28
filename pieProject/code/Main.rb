@@ -71,7 +71,7 @@ if __FILE__ == $0
     #new code: -
     canvasPacker = FXPacker.new(editor_window,LAYOUT_FILL_X|LAYOUT_FILL_Y)
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
-    canvas_window.backColor = "Gray69"
+    canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
 
     color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
