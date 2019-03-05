@@ -1,4 +1,3 @@
-
 $LOAD_PATH << '.'
 
 require 'Canvas.rb'
@@ -7,20 +6,24 @@ require 'Menu'
 require 'fox16'
 require 'ColorPanel.rb'
 require 'FloatingToolBar.rb'
+require 'layerPanel.rb'
+require 'SplashScreen.rb'
 
 include Fox
 
 class EditorWindow < FXMainWindow
-  def initialize(app,logo)
-    super(app, "Pixel Image Editor", logo, :width => 700, :height => 700)
+  def initialize(app,logo,w,h)
+    super(app, "PIE", logo, logo, :width => w, :height => h)
     #addMenuBar
-    menuBar = MenuBar.new(self, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
+    floating_menu_bar = FloatingToolBar.new(self,LAYOUT_SIDE_TOP,LAYOUT_FILL_X,0,0)
+    menuBar = MenuBar.new(app, floating_menu_bar.getToolBar, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
   end
   
   def create
     super
     show(PLACEMENT_SCREEN)
   end
+
 
 end
 
@@ -36,21 +39,52 @@ if __FILE__ == $0
     icon
 
     #call editor_window constructor
-    editor_window = EditorWindow.new(app,icon)
+    editor_window = EditorWindow.new(app,icon,400,400)
+    editor_window.backColor = "Gray20"
 
+    #create a splash screen object with editor_window as its scope
+    splash_screen = SplashScreen.new(editor_window,LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
+    
     #adding floating ui to this brush_tool_bar
     brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT,0,0,0)
+    splash_screen.addHideElement(brush_tool_bar.getToolBar,editor_window)
+
+    #adding floating ui to layerPanel
+    layer_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_RIGHT,0,0,0)
+    splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
 
     #adding floating ui to color_window
     color_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_BOTTOM,LAYOUT_CENTER_X,0,0)
     #adding empty dock for all toolbar objects
     color_tool_bar.addDock(LAYOUT_SIDE_RIGHT,0,0,0)
+    splash_screen.addHideElement(color_tool_bar.getToolBar,editor_window)
 
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
-    draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250, 0, 0, 0, 0)
+    brush_window.backColor = "Gray69"
+    splash_screen.addHideElement(brush_window,editor_window)
+
+    #old code:-
+    #draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250,0, 0, 0, 0, 0)
+    #draw.backColor = "Gray69"
+    #splash_screen.addHideElement(draw,editor_window)
+
+    #new code: -
+    canvasPacker = FXPacker.new(editor_window,LAYOUT_FILL_X|LAYOUT_FILL_Y)
+    canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
+    canvasPacker.backColor = "Gray69"
+    splash_screen.addHideElement(canvasPacker,editor_window)
+
     color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
-    FXToolTip.new(app)
-    app.create
-    app.run
+    color_window.backColor = "Gray69"
+    splash_screen.addHideElement(color_window,editor_window)
+
+    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
+    layerPanel.backColor = "Gray69"
+    splash_screen.addHideElement(layerPanel,editor_window)
+
+  FXToolTip.new(app)
+  app.create
+  app.run
+
   end
 end

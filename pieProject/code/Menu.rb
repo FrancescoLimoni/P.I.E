@@ -1,18 +1,45 @@
 class MenuBar
-    def initialize(x,y,z)
+    def initialize(app,x,y,z)
         puts "creating menu bar"
   
-        # set up menu layout properties ======================================
+        # set up menu LayerPanel properties ======================================
 
         menuBar = FXMenuBar.new(x, y | z)  
+        menuBar.backColor = "Gray69"
             # create pointers (to link new 'FXMenuPane' wutg a new 'FXMenuTitle')
         fileMenu = FXMenuPane.new(x)  #self refers to the TextEditor window
         about = FXMenuPane.new(x)  #self refers to the TextEditor window
 
-        #create main menu Items ================================================
+        #load icons functions ==================================================
+        def readIcon(scope,path)
+            icon = nil
+            File.open(path, "rb") do |io|
+            icon = FXPNGIcon.new(scope, io.read)
+            icon.scale(25,25)
+            end
+            icon
+        end
 
-        FXMenuTitle.new(menuBar, "File", :popupMenu => fileMenu)  
-        FXMenuTitle.new(menuBar, "About", :popupMenu => about) 
+        #create main menu Items ================================================
+        
+        fileTab = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/pie.png"), :popupMenu => fileMenu)  
+        fileTab.backColor = "Gray69"
+
+        fileNew = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filenew.png"), :popupMenu => nil)  
+        fileNew.backColor = "Gray69"
+
+        fileLoad = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/fileopen.png"), :popupMenu => nil)  
+        fileLoad.backColor = "Gray69"
+
+        fileSave = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filesave.png"), :popupMenu => nil)  
+        fileSave.backColor = "Gray69"
+
+        fileSave_s = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filesaves.png"), :popupMenu => nil)  
+        fileSave_s.backColor = "Gray69"
+
+        aboutTab = FXMenuTitle.new(menuBar, "About", :popupMenu => about, :opts => LAYOUT_CENTER_Y) 
+        aboutTab.backColor = "Gray69"
+
 
         #create sub menue Items=================================================
 
