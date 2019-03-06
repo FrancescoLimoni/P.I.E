@@ -12,18 +12,20 @@ class Canvas
     @contents = FXHorizontalFrame.new(p, opts, x, y, width, height,
      padLeft, padRight, padTop, padBottom)
      
-    @canvas_frame = FXVerticalFrame.new(@contents,FRAME_SUNKEN|LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 
+    @canvas_frame = FXVerticalFrame.new(@contents,FRAME_SUNKEN|LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT,
    0, 0, 0, 0, 0, 0, 0, 0) 
+
     
-    @canvas = FXCanvas.new(@canvas_frame, nil, 0, LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 0, 0, 0, 0,) 
-  
+    @canvas = FXCanvas.new(@canvas_frame, nil, 0, LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 0, 0, 0, 0,)
   
   
     @drawColor = FXRGB(255, 0, 0)
     @mouseDown = false
+
     @dirty = false
     @brushWidth = 10
     @brushHeight = 1     
+
     
     @canvas.connect(SEL_PAINT) do |sender, sel, event|
       FXDCWindow.new(@canvas,event) do |dc|
@@ -31,6 +33,7 @@ class Canvas
         dc.fillRectangle(event.rect.x, event.rect.y, event.rect.w,  event.rect.h)
       end
     end
+
     @canvas.connect(SEL_LEFTBUTTONPRESS) do
       @canvas.grab
       @mouseDown = true
@@ -81,6 +84,7 @@ class Canvas
         dc.end
       end
     end
+
    end
   self.instance_variables
 #self.connect(SEL_PAINT) do |sender, sel, event|
