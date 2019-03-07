@@ -67,6 +67,7 @@ if __FILE__ == $0
     brush_window.backColor = "Gray69"
     splash_screen.addHideElement(brush_window,editor_window)
 
+
     canvasPacker = FXPacker.new(editor_window,LAYOUT_FILL_X|LAYOUT_FILL_Y)
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
     canvasPacker.backColor = "Gray69"
@@ -76,7 +77,7 @@ if __FILE__ == $0
     color_window.backColor = "Gray69"
     splash_screen.addHideElement(color_window,editor_window)
 
-    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X, 0,0, 161, 120)
+    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
     layerPanel.backColor = "Gray69"
     splash_screen.addHideElement(layerPanel,editor_window)
 

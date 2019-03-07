@@ -13,7 +13,7 @@ class LayerPanel < FXPacker
     @hideB
     @deleteB
 
-    packer = FXPacker.new(self, opts =  LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT)
+    packer = FXPacker.new(self, opts =  LAYOUT_SIDE_RIGHT)
     packerCustomization(packer)
 
     gruopBox = FXGroupBox.new(packer, "Layer", :opts => GROUPBOX_TITLE_CENTER|FRAME_RIDGE)
