@@ -90,10 +90,15 @@ class Canvas
 
    end
    
-def setDrawColor(color)
-    puts("draw color set to " + color)
-    @drawColor = color
-end
+   def setDrawColor(color)
+      puts("draw color set to " + color)
+      @drawColor = color
+   end
+
+    def setDrawColorViaRGB(r, g, b)
+      puts("draw color set to " + color)
+         @drawColor = FXRGB(r, g, b)
+    end
    
   self.instance_variables
 #self.connect(SEL_PAINT) do |sender, sel, event|
