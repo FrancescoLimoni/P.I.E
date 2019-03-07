@@ -16,7 +16,7 @@ class EditorWindow < FXMainWindow
   def initialize(app,logo,w,h)
     super(app, "PIE", logo, logo, :width => w, :height => h)
     #addMenuBar
-    floating_menu_bar = FloatingToolBar.new(self,LAYOUT_SIDE_TOP,LAYOUT_FILL_X,0,0)
+    floating_menu_bar = FloatingToolBar.new(self,LAYOUT_SIDE_TOP|LAYOUT_FILL_X)
     menuBar = MenuBar.new(app, floating_menu_bar.getToolBar, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
   end
   
@@ -50,29 +50,23 @@ if __FILE__ == $0
     splash_screen = SplashScreen.new(editor_window,LAYOUT_CENTER_X | LAYOUT_CENTER_Y)
     
     #adding floating ui to this brush_tool_bar
-    brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT,0,0,0)
+    brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT)
     splash_screen.addHideElement(brush_tool_bar.getToolBar,editor_window)
 
     #adding floating ui to layerPanel
-    layer_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_BOTTOM,LAYOUT_CENTER_X,0,0)
+    layer_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X)
     splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
 
     #adding floating ui to color_window
-    color_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_RIGHT,0,0,0)
+    color_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_RIGHT)
     #adding empty dock for all toolbar objects
-    color_tool_bar.addDock(LAYOUT_SIDE_RIGHT,0,0,0)
+    color_tool_bar.addDock(LAYOUT_SIDE_RIGHT)
     splash_screen.addHideElement(color_tool_bar.getToolBar,editor_window)
 
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
     brush_window.backColor = "Gray69"
     splash_screen.addHideElement(brush_window,editor_window)
 
-    #old code:-
-    #draw = Canvas.new(editor_window, app, FRAME_THICK| LAYOUT_CENTER_X || LAYOUT_CENTER_Y, 1000, 200, 250, 250,0, 0, 0, 0, 0)
-    #draw.backColor = "Gray69"
-    #splash_screen.addHideElement(draw,editor_window)
-
-    #new code: -
     canvasPacker = FXPacker.new(editor_window,LAYOUT_FILL_X|LAYOUT_FILL_Y)
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
     canvasPacker.backColor = "Gray69"
