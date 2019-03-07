@@ -2,12 +2,13 @@
 
 require 'fox16'
 require 'Color.rb'
+require 'Canvas.rb'
 include Fox
 
 class ColorPanel < FXPacker
-  def initialize(p, opts, x, y, width, height)
+  def initialize(p, opts, x, y, width, height, c)
     super(p, opts, x, y, width, height)
-    
+    @canvas_window = c
     #Create 'Color Picker' box to hold buttons
     groupBoxColorPanel = FXGroupBox.new(self, "Color Picker", GROUPBOX_TITLE_CENTER | FRAME_RIDGE | LAYOUT_CENTER_X)
     groupBoxPreset = FXGroupBox.new(groupBoxColorPanel, "Presets", GROUPBOX_TITLE_CENTER | FRAME_RIDGE | LAYOUT_CENTER_X) 
@@ -28,6 +29,7 @@ class ColorPanel < FXPacker
   
   def createButtons(framing, groupStyle)
     randColor = Color.new()
+    #c = Canvas.new()
     
     #Creates 5X3 Button matrix
     1.upto(15) do |i|
@@ -48,6 +50,22 @@ class ColorPanel < FXPacker
     blackBtn    = FXButton.new(framing, "\tBlack Preset", black,  :opts => LAYOUT_CENTER_X)
     whiteBtn    = FXButton.new(framing, "\tWhite Preset", white,  :opts => LAYOUT_CENTER_X)
     
+    redBtn.connect(SEL_COMMAND) do | sender, sel, data|
+             @canvas_window.setDrawColor("red")
+    end
+    greenBtn.connect(SEL_COMMAND) do | sender, sel, data|
+             @canvas_window.setDrawColor("green")
+    end
+    blueBtn.connect(SEL_COMMAND) do | sender, sel, data|
+             @canvas_window.setDrawColor("blue")
+    end
+    blackBtn.connect(SEL_COMMAND) do | sender, sel, data|
+             @canvas_window.setDrawColor("black")
+    end
+    whiteBtn.connect(SEL_COMMAND) do | sender, sel, data|
+             @canvas_window.setDrawColor("white")
+    end
+    
     #Stylize buttons
     redBtn.frameStyle     = FRAME_RAISED
     greenBtn.frameStyle   = FRAME_RAISED
@@ -55,6 +73,8 @@ class ColorPanel < FXPacker
     blackBtn.frameStyle   = FRAME_RAISED
     whiteBtn.frameStyle   = FRAME_RAISED
   end
+  
+  
   
   def loadIcon(filename)
       begin
