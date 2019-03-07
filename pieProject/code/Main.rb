@@ -8,6 +8,7 @@ require 'ColorPanel.rb'
 require 'FloatingToolBar.rb'
 require 'layerPanel.rb'
 require 'SplashScreen.rb'
+require 'Color.rb'
 
 include Fox
 
@@ -41,20 +42,23 @@ if __FILE__ == $0
     #call editor_window constructor
     editor_window = EditorWindow.new(app,icon,400,400)
     editor_window.backColor = "Gray20"
-
+    
+    #groupBoxV = FXGroupBox.new(packer, nil, :opts => FRAME_RIDGE | GROUPBOX_NORMAL)
+    #rightVFrame = FXHorizontalFrame.new(groupBoxV) 
+    
     #create a splash screen object with editor_window as its scope
-    splash_screen = SplashScreen.new(editor_window,LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
+    splash_screen = SplashScreen.new(editor_window,LAYOUT_CENTER_X | LAYOUT_CENTER_Y)
     
     #adding floating ui to this brush_tool_bar
     brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT,0,0,0)
     splash_screen.addHideElement(brush_tool_bar.getToolBar,editor_window)
 
     #adding floating ui to layerPanel
-    layer_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_RIGHT,0,0,0)
+    layer_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_BOTTOM,LAYOUT_CENTER_X,0,0)
     splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
 
     #adding floating ui to color_window
-    color_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_BOTTOM,LAYOUT_CENTER_X,0,0)
+    color_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_RIGHT,0,0,0)
     #adding empty dock for all toolbar objects
     color_tool_bar.addDock(LAYOUT_SIDE_RIGHT,0,0,0)
     splash_screen.addHideElement(color_tool_bar.getToolBar,editor_window)
@@ -73,8 +77,8 @@ if __FILE__ == $0
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
     canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
-
-    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 176, 55)
+    
+    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 150, 200)
     color_window.backColor = "Gray69"
     splash_screen.addHideElement(color_window,editor_window)
 
@@ -85,6 +89,5 @@ if __FILE__ == $0
   FXToolTip.new(app)
   app.create
   app.run
-
   end
 end
