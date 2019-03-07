@@ -1,5 +1,6 @@
 $LOAD_PATH << '.'
 require 'fox16'
+require 'Color.rb'
 
 include Fox
 
@@ -16,10 +17,12 @@ class Canvas
    0, 0, 0, 0, 0, 0, 0, 0) 
 
     
-    @canvas = FXCanvas.new(@canvas_frame, nil, 0, LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 0, 0, 0, 0,)
-  
-  
-    @drawColor = FXRGB(255, 0, 0)
+    @canvas = FXCanvas.new(@canvas_frame, nil, 0, LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 0, 0, 0, 0)
+    
+    #default draw color
+    @drawColor = setDrawColor("black")
+    
+    #@drawColor = FXRGB(255, 0, 0)
     @mouseDown = false
 
     @dirty = false
@@ -39,7 +42,7 @@ class Canvas
       @mouseDown = true
       if @mousedown
         dc = FXDCWindow.new(@canvas)
-        dc.foreground = @drawcolor
+        dc.foreground = @drawColor
         dc.drawLine(event.last_x, event.last_y, event.last_x + 1, event.last_y + 1)
         @dirty = true
         dc.end
@@ -86,6 +89,12 @@ class Canvas
     end
 
    end
+   
+def setDrawColor(color)
+    puts("draw color set to " + color)
+    @drawColor = color
+end
+   
   self.instance_variables
 #self.connect(SEL_PAINT) do |sender, sel, event|
 end

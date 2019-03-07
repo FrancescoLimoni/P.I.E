@@ -78,7 +78,7 @@ if __FILE__ == $0
     canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
     
-    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 150, 200)
+    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 150, 200, canvas_window)
     color_window.backColor = "Gray69"
     splash_screen.addHideElement(color_window,editor_window)
 
