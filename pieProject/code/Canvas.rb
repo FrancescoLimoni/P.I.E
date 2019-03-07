@@ -96,7 +96,7 @@ class Canvas
    end
 
     def setDrawColorViaRGB(r, g, b)
-      puts("draw color set to " + color)
+      puts("draw color set to (" + r + ", " + g + ", " + b + ")")
          @drawColor = FXRGB(r, g, b)
     end
    
