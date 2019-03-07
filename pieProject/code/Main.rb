@@ -53,15 +53,19 @@ if __FILE__ == $0
     brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT)
     splash_screen.addHideElement(brush_tool_bar.getToolBar,editor_window)
 
-    #adding floating ui to layerPanel
-    layer_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X)
-    splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
+    #make layer panel and color panel on top of each other
+    frameV = FXVerticalFrame.new(editor_window, :opts => LAYOUT_SIDE_RIGHT)
+    splash_screen.addHideElement(frameV,editor_window)
 
     #adding floating ui to color_window
-    color_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_RIGHT)
+    color_tool_bar = FloatingToolBar.new(frameV,LAYOUT_SIDE_RIGHT)
     #adding empty dock for all toolbar objects
     color_tool_bar.addDock(LAYOUT_SIDE_RIGHT)
     splash_screen.addHideElement(color_tool_bar.getToolBar,editor_window)
+    
+    #adding floating ui to layerPanel
+    layer_tool_bar = FloatingToolBar.new(frameV,LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X)
+    splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
 
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
     brush_window.backColor = "Gray69"
