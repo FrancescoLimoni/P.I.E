@@ -82,7 +82,7 @@ if __FILE__ == $0
     color_window.backColor = "Gray69"
     splash_screen.addHideElement(color_window,editor_window)
 
-    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
+    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X, 0,0, 161, 120)
     layerPanel.backColor = "Gray69"
     splash_screen.addHideElement(layerPanel,editor_window)
 

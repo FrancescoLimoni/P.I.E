@@ -9,7 +9,9 @@ class LayerPanel < FXPacker
     icon1 = loadIcon("plusIcon20.png")
     @icon2 = loadIcon("binIcon24.png")
     @icon3 = loadIcon("hideIcon20.png")
-    @layers = Array.new()
+    @layerSections = Array.new()
+    @hideB
+    @deleteB
 
     packer = FXPacker.new(self, opts =  LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT)
     packerCustomization(packer)
@@ -23,16 +25,17 @@ class LayerPanel < FXPacker
     plusB = FXButton.new(frameV, nil, icon1, :opts => LAYOUT_RIGHT)
     buttonCustomization(plusB, false, true)
 
-    addLayer(@layers, frameV)
+    addLayerSections(@layerSections, frameV)
 
+    #botton action
     plusB.connect(SEL_COMMAND) do | sender, sel, data|
-      addLayer(@layers, frameV)
-      puts('Array size:' + @layers.size.to_s)
+      addLayerSections(@layerSections, frameV)
+      puts('Array size:' + @layerSections.size.to_s)
     end
   end
 
   #METHODS SECTION
-  # loading button icone
+  # loading button icon
   def loadIcon(iconName)
     begin
       iconName = File.join("icons", iconName)
@@ -46,7 +49,7 @@ class LayerPanel < FXPacker
     end
   end
 
-  #button style
+  #button custamization
   def buttonCustomization(button, inner, outside)
     if outside
       button.buttonStyle |= BUTTON_TOOLBAR
@@ -68,17 +71,73 @@ class LayerPanel < FXPacker
     packer.backColor = "Gray69"
   end
 
-  #create a new layer
-  def addLayer(layers, frameV)
-    index = layers.size
+  #create a new layer sections
+  def addLayerSections(layerSections, frameV)
+    @isHidden = false
+    index = layerSections.size
     index += 1
     frameH = FXHorizontalFrame.new(frameV, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|FRAME_LINE)
     binB = FXButton.new(frameH, nil, @icon2, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|LAYOUT_CENTER_Y)
     buttonCustomization(binB, true, false)
     hideB = FXButton.new(frameH, nil, @icon3, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_LEFT|LAYOUT_CENTER_Y)
     buttonCustomization(hideB, true, false)
-    FXLabel.new(frameH, 'LAYER ' + index.to_s, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
+    label = FXLabel.new(frameH, 'LAYER ' + index.to_s, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
 
-    layers.push(frameH)
+    layerSections.push(frameH)
+
+    #botton Action
+    binB.connect(SEL_COMMAND) do | sender, sel, data |
+      deleteLayer(layerSections)
+      puts("deleting process")
+    end
+    hideB.connect(SEL_COMMAND) do|sender, sel, data|
+      @isHidden = hideSectionCustomization(frameH, label, binB, hideB, @isHidden)
+      puts("isHidden (outside): " + @isHidden.to_s)
+    end
   end
+
+  #hide a layer section
+  def hideLayerSections()
+
+  end
+
+  #layer customization
+  def hideSectionCustomization(frameH, label, binB, hideB, isHidden)
+
+    puts("\nisHidden (inside up): " + isHidden.to_s)
+
+    if !isHidden
+      frameH.backColor = FXRGB(176, 176, 176)
+      frameH.borderColor = FXRGB(106, 106, 106)
+      label.backColor = FXRGB(176, 176, 176)
+      label.textColor = FXRGB(56, 56, 56)
+      binB.backColor = FXRGB(176, 176, 176)
+      hideB.backColor = FXRGB(176, 176, 176)
+      isHidden = true
+    else
+      frameH.backColor = FXRGB(212, 208, 200)
+      frameH.borderColor = FXRGB(0, 0, 0)
+      label.backColor = FXRGB(212, 208, 200)
+      label.textColor = FXRGB(0, 0, 0)
+      binB.backColor = FXRGB(212, 208, 200)
+      hideB.backColor = FXRGB(212, 208, 200)
+      isHidden = false
+    end
+
+    puts("isHidden (inside down): " + isHidden.to_s)
+    return isHidden
+  end
+
+  #delete a layer section
+  def deleteLayer(layerSections)
+    index = layerSections.size
+
+    if index == 1
+      FXMessageBox.warning(self, MBOX_OK, "WARNING MESSAGE", "You cannot delete this layer")
+    elsif index > 1
+      layerSections.pop
+      puts("array: " + layerSections.size.to_s)
+    end
+  end
+
 end
