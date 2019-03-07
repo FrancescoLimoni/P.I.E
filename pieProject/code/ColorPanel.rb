@@ -29,11 +29,77 @@ class ColorPanel < FXPacker
   
   def createButtons(framing, groupStyle)
     randColor = Color.new()
-    #c = Canvas.new()
+    randColorArray = Array.new(15)
     
     #Creates 5X3 Button matrix
     1.upto(15) do |i|
-          FXButton.new(groupStyle, "-").backColor = randColor.getRandColor
+      randColorArray.insert(i-1, randColor.getRandColor)
+      rand = FXButton.new(groupStyle, "-").backColor = randColorArray[i-1]
+      #rand.connect(SEL_COMMAND) do | sender, sel, data|
+            #@canvas_window.setDrawColor(color)
+      #end
+    end
+    
+    customColor1 = groupStyle.childAtRowCol(0, 0)
+    customColor2 = groupStyle.childAtRowCol(1, 0)
+    customColor3 = groupStyle.childAtRowCol(2, 0)
+    customColor4 = groupStyle.childAtRowCol(0, 1)
+    customColor5 = groupStyle.childAtRowCol(1, 1)
+    customColor6 = groupStyle.childAtRowCol(2, 1)
+    customColor7 = groupStyle.childAtRowCol(0, 2)
+    customColor8 = groupStyle.childAtRowCol(1, 2)
+    customColor9 = groupStyle.childAtRowCol(2, 2)
+    customColor10 = groupStyle.childAtRowCol(0, 3)
+    customColor11 = groupStyle.childAtRowCol(1, 3)
+    customColor12 = groupStyle.childAtRowCol(2, 3)
+    customColor13 = groupStyle.childAtRowCol(0, 4)
+    customColor14 = groupStyle.childAtRowCol(1, 4)
+    customColor15 = groupStyle.childAtRowCol(2, 4)
+    
+    customColor1.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[0])
+    end
+    customColor2.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[1])
+    end
+    customColor3.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[2])
+    end
+    customColor4.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[3])
+    end
+    customColor5.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[4])
+    end
+    customColor6.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[5])
+    end
+    customColor7.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[6])
+    end
+    customColor8.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[7])
+    end
+    customColor9.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[8])
+    end
+    customColor10.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[9])
+    end
+    customColor11.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[10])
+    end
+    customColor12.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[11])
+    end
+    customColor13.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[12])
+    end
+    customColor14.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[13])
+    end
+    customColor15.connect(SEL_COMMAND) do | sender, sel, data|
+           @canvas_window.setDrawColor(randColorArray[14])
     end
     
     #Load icons
@@ -73,8 +139,6 @@ class ColorPanel < FXPacker
     blackBtn.frameStyle   = FRAME_RAISED
     whiteBtn.frameStyle   = FRAME_RAISED
   end
-  
-  
   
   def loadIcon(filename)
       begin
