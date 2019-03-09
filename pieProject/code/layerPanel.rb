@@ -1,41 +1,41 @@
+#
+# Version 0.3
+# made on 03/09/2019
+# upgrade: I created a new LPFields class and I stored the instances into an array of object. delete button action integrated and functioning
+# downgrade: the loadIcon function doesn't load the icon buttons
+# persistent issues: unable to see the new horizontal frame after has been created
+#
+
 require 'fox16'
 include Fox
 
-class LayerPanel < FXPacker
-  def initialize(p, opts, x, y, width, height)
-    super(p,  opts, x, y, width, height)
+class LPFields
+  attr_accessor :frameH, :hideB, :label, :binB
 
-    #images for layer buttons
-    icon1 = loadIcon("plusIcon20.png")
-    @icon2 = loadIcon("binIcon24.png")
-    @icon3 = loadIcon("hideIcon20.png")
-    @layerSections = Array.new()
-    @hideB
-    @deleteB
+  def initialize(frameV, layers)
+    isHidden = false
+    #hideBI = loadIcon("hideIcon20.png")
+    #binBI = loadIcon("binIcon24.png")
 
-    packer = FXPacker.new(self, opts =  LAYOUT_SIDE_RIGHT)
-    packerCustomization(packer)
+    frameH = FXHorizontalFrame.new(frameV, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|FRAME_LINE)
+    hideB = FXButton.new(frameH, "H", nil, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_LEFT|LAYOUT_CENTER_Y)
+    buttonCustomization(hideB, true, false)
+    label = FXLabel.new(frameH, 'Layer ' + (layers.size + 1).to_s, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
+    binB = FXButton.new(frameH, "D", nil, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|LAYOUT_CENTER_Y)
+    buttonCustomization(binB, true, false)
 
-    gruopBox = FXGroupBox.new(packer, "Layer", :opts => GROUPBOX_TITLE_CENTER|FRAME_RIDGE)
-    gruopBox.backColor = "Gray69"
-
-    frameV = FXVerticalFrame.new(gruopBox, :opts => LAYOUT_SIDE_BOTTOM)
-    frameV.backColor = "Gray69"
-
-    plusB = FXButton.new(frameV, nil, icon1, :opts => LAYOUT_RIGHT)
-    buttonCustomization(plusB, false, true)
-
-    addLayerSections(@layerSections, frameV)
-
-    #botton action
-    plusB.connect(SEL_COMMAND) do | sender, sel, data|
-      addLayerSections(@layerSections, frameV)
-      puts('Array size:' + @layerSections.size.to_s)
+    #BUTTON ACTION SECTION
+    hideB.connect(SEL_COMMAND) do|sender, sel, data|
+      isHidden = hideSection(frameH, hideB, label, binB, isHidden)
+    end
+    binB.connect(SEL_COMMAND) do|sender, sel, data|
+      index = label.getText[-1]
+      frameV.removeChild(frameH)
+      layers.delete_at((index.to_i)-1)
     end
   end
 
   #METHODS SECTION
-  # loading button icon
   def loadIcon(iconName)
     begin
       iconName = File.join("icons", iconName)
@@ -62,50 +62,8 @@ class LayerPanel < FXPacker
     end
   end
 
-  #create space from the packer's borders
-  def packerCustomization(packer)
-    packer.padLeft = 10
-    packer.padRight = 10
-    packer.padTop = 10
-    packer.padBottom = 10
-    packer.backColor = "Gray69"
-  end
-
-  #create a new layer sections
-  def addLayerSections(layerSections, frameV)
-    @isHidden = false
-    index = layerSections.size
-    index += 1
-    frameH = FXHorizontalFrame.new(frameV, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|FRAME_LINE)
-    binB = FXButton.new(frameH, nil, @icon2, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|LAYOUT_CENTER_Y)
-    buttonCustomization(binB, true, false)
-    hideB = FXButton.new(frameH, nil, @icon3, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_LEFT|LAYOUT_CENTER_Y)
-    buttonCustomization(hideB, true, false)
-    label = FXLabel.new(frameH, 'LAYER ' + index.to_s, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
-
-    layerSections.push(frameH)
-
-    #botton Action
-    binB.connect(SEL_COMMAND) do | sender, sel, data |
-      deleteLayer(layerSections)
-      puts("deleting process")
-    end
-    hideB.connect(SEL_COMMAND) do|sender, sel, data|
-      @isHidden = hideSectionCustomization(frameH, label, binB, hideB, @isHidden)
-      puts("isHidden (outside): " + @isHidden.to_s)
-    end
-  end
-
-  #hide a layer section
-  def hideLayerSections()
-
-  end
-
-  #layer customization
-  def hideSectionCustomization(frameH, label, binB, hideB, isHidden)
-
-    puts("\nisHidden (inside up): " + isHidden.to_s)
-
+  #change the color of layer section
+  def hideSection(frameH, hideB, label, binB, isHidden)
     if !isHidden
       frameH.backColor = FXRGB(176, 176, 176)
       frameH.borderColor = FXRGB(106, 106, 106)
@@ -124,19 +82,77 @@ class LayerPanel < FXPacker
       isHidden = false
     end
 
-    puts("isHidden (inside down): " + isHidden.to_s)
     return isHidden
   end
+end
 
-  #delete a layer section
-  def deleteLayer(layerSections)
-    index = layerSections.size
+class LayerPanel < FXPacker
+  def initialize(p, opts, x, y, width, height)
+    super(p,  opts, x, y, width, height)
 
-    if index == 1
-      FXMessageBox.warning(self, MBOX_OK, "WARNING MESSAGE", "You cannot delete this layer")
-    elsif index > 1
-      layerSections.pop
-      puts("array: " + layerSections.size.to_s)
+    #images for layer buttons
+    plusB = loadIcon("plusIcon20.png")
+    @layers = Array.new
+
+    packer = FXPacker.new(self, opts =  LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT)
+    packerCustomization(packer)
+
+    groupBox = FXGroupBox.new(packer, "Layer", :opts => GROUPBOX_TITLE_CENTER|FRAME_RIDGE|LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
+    groupBox.backColor = "Gray69"
+
+    frameV = FXVerticalFrame.new(groupBox, :opts => LAYOUT_SIDE_BOTTOM)
+    frameV.backColor = "Gray69"
+
+    plusB = FXButton.new(frameV, nil, plusB, :opts => LAYOUT_RIGHT)
+    buttonCustomization(plusB, false, true)
+
+    layerFields = LPFields.new(frameV, @layers)
+    @layers.push(layerFields)
+    layerFields = LPFields.new(frameV, @layers)
+    @layers.push(layerFields)
+
+    #BUTTON ACTION SECTION
+    plusB.connect(SEL_COMMAND) do | seler, sel, data|
+      layerFields = LPFields.new(frameV, @layers)
+      @layers.push(layerFields)
+    end
+
+
+  end
+
+  #METHODS SECTION
+  def loadIcon(iconName)
+    begin
+      iconName = File.join("icons", iconName)
+      icon = nil
+      File.open(iconName, "rb") do |f|
+        icon = FXPNGIcon.new(getApp(), f.read)
+      end
+      icon
+    rescue
+      raise RuntimeError, "Couldn't load icon: #{iconName}"
+    end
+  end
+
+  #create space from the packer's borders
+  def packerCustomization(packer)
+    packer.padLeft = 10
+    packer.padRight = 10
+    packer.padTop = 10
+    packer.padBottom = 10
+    packer.backColor = "Gray69"
+  end
+
+  #button custamization
+  def buttonCustomization(button, inner, outside)
+    if outside
+      button.buttonStyle |= BUTTON_TOOLBAR
+      button.frameStyle = FRAME_RAISED
+      button.backColor = "Gray69"
+    elsif inner
+      button.buttonStyle |= BUTTON_TOOLBAR
+      button.frameStyle = FRAME_RAISED
+      button.backColor = FXRGB(212, 208, 200)
     end
   end
 
