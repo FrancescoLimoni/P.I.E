@@ -92,6 +92,7 @@ class LayerPanel < FXPacker
 
     #images for layer buttons
     plusB = loadIcon("plusIcon20.png")
+    #plusB = loadIcon("filesave.png")
     @layers = Array.new
 
     packer = FXPacker.new(self, opts =  LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT)

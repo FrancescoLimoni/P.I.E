@@ -1,6 +1,8 @@
 class MenuBar
     def initialize(app,x,y,z)
         puts "creating menu bar"
+
+        @friendObject = nil
   
         # set up menu LayerPanel properties ======================================
 
@@ -52,10 +54,16 @@ class MenuBar
             #under 'About' tab
         aboutCmd = FXMenuCommand.new(about, "contact us") 
         
+        
+        #splash screen friend function=================================================
+        def splashScreenFriendfunction(splahsScreenObject)
+            @friendObject = splahsScreenObject
+        end
         #connect sub menue Items to functions =====================================
 
         newCmd.connect(SEL_COMMAND) do
             #@txt.text = ""
+            @friendObject.forFriendfunctions
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  

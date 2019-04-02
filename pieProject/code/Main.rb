@@ -13,11 +13,13 @@ require 'Color.rb'
 include Fox
 
 class EditorWindow < FXMainWindow
+
+
   def initialize(app,logo,w,h)
     super(app, "PIE", logo, logo, :width => w, :height => h)
     #addMenuBar
     floating_menu_bar = FloatingToolBar.new(self,LAYOUT_SIDE_TOP|LAYOUT_FILL_X)
-    menuBar = MenuBar.new(app, floating_menu_bar.getToolBar, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
+    @menuBar = MenuBar.new(app, floating_menu_bar.getToolBar, LAYOUT_SIDE_TOP , LAYOUT_FILL_X)
   end
   
   def create
@@ -25,6 +27,11 @@ class EditorWindow < FXMainWindow
     show(PLACEMENT_SCREEN)
   end
 
+  #add friend funtion from splashscreen to menuBar
+  def editMenuBar(splashScreen)
+    puts 'creating new project'
+    @menuBar.splashScreenFriendfunction(splashScreen)
+  end
 
 end
 
@@ -48,7 +55,9 @@ if __FILE__ == $0
     
     #create a splash screen object with editor_window as its scope
     splash_screen = SplashScreen.new(editor_window,LAYOUT_CENTER_X | LAYOUT_CENTER_Y)
-    
+    #add friend funtion from splashscreen to menuBar via editor_window
+    editor_window.editMenuBar(splash_screen)
+
     #adding floating ui to this brush_tool_bar
     brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT)
     splash_screen.addHideElement(brush_tool_bar.getToolBar,editor_window)
@@ -81,7 +90,7 @@ if __FILE__ == $0
     color_window.backColor = "Gray69"
     splash_screen.addHideElement(color_window,editor_window)
 
-    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
+    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FILL_Y | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
     layerPanel.backColor = "Gray69"
     splash_screen.addHideElement(layerPanel,editor_window)
 
