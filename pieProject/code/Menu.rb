@@ -27,28 +27,20 @@ class MenuBar
         fileTab = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/pie.png"), :popupMenu => fileMenu)  
         fileTab.backColor = "Gray69"
 
-        fileNew = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filenew.png"), :popupMenu => nil)  
-        fileNew.backColor = "Gray69"
-
-        fileLoad = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/fileopen.png"), :popupMenu => nil)  
-        fileLoad.backColor = "Gray69"
-
-        fileSave = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filesave.png"), :popupMenu => nil)  
-        fileSave.backColor = "Gray69"
-
-        fileSave_s = FXMenuTitle.new(menuBar, nil, readIcon(app,"icons/filesaves.png"), :popupMenu => nil)  
-        fileSave_s.backColor = "Gray69"
-
-        aboutTab = FXMenuTitle.new(menuBar, "About", :popupMenu => about, :opts => LAYOUT_CENTER_Y) 
-        aboutTab.backColor = "Gray69"
-
-
+        #btns
+        fileNew = FXButton.new(menuBar,"\tCreate New Canvas",:icon => readIcon(app,"icons/filenew.png"))
+        fileSave = FXButton.new(menuBar,"\tQuick Save",:icon => readIcon(app,"icons/filesave.png"))
+        fileSave_s = FXButton.new(menuBar,"\tSave new canvas",:icon => readIcon(app,"icons/filesaves.png"))
+        fileLoad = FXButton.new(menuBar,"\tLoad Canvas",:icon => readIcon(app,"icons/fileopen.png"))
+        aboutTab = FXButton.new(menuBar,"About")
+        
         #create sub menue Items=================================================
 
             #under 'File' tab 
         newCmd = FXMenuCommand.new(fileMenu, "New")
         loadCmd = FXMenuCommand.new(fileMenu, "Load")
         saveCmd = FXMenuCommand.new(fileMenu, "Save") 
+        gitHubLink = FXMenuCommand.new(fileMenu, "GitHub")
         exitCmd = FXMenuCommand.new(fileMenu, "Exit")
 
             #under 'About' tab
@@ -60,13 +52,25 @@ class MenuBar
             @friendObject = splahsScreenObject
         end
         #connect sub menue Items to functions =====================================
-
+        fileNew.connect(SEL_COMMAND) do
+            @friendObject.forFriendfunctions
+        end
+        #**************************************************************************
         newCmd.connect(SEL_COMMAND) do
             #@txt.text = ""
             @friendObject.forFriendfunctions
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  
+            dialog = FXFileDialog.new(x, "Load a File") 
+            dialog.selectMode = SELECTFILE_EXISTING 
+            dialog.patternList = ["All Files (*)"]  
+            if dialog.execute != 0  
+            load_file(dialog.filename)  
+            end   
+        end
+        #**************************************************************************
+        fileLoad.connect(SEL_COMMAND) do  
             dialog = FXFileDialog.new(x, "Load a File") 
             dialog.selectMode = SELECTFILE_EXISTING 
             dialog.patternList = ["All Files (*)"]  
@@ -84,13 +88,32 @@ class MenuBar
             end
         end
         #**************************************************************************
+        fileSave_s.connect(SEL_COMMAND) do
+            dialog = FXFileDialog.new(x, "Save a File")  
+            dialog.selectMode = SELECTFILE_EXISTING  
+            dialog.patternList = ["All Files (*)"]  
+            if dialog.execute != 0  
+                save_file(dialog.filename)  
+            end
+        end
+        #**************************************************************************
+        fileSave.connect(SEL_COMMAND) do
+            puts "quick save"
+        end
+        #**************************************************************************
         exitCmd.connect(SEL_COMMAND) do
             puts "exiting program"
             exit
         end
         #**************************************************************************
-        aboutCmd.connect(SEL_COMMAND) do
-            # ...
+        aboutTab.connect(SEL_COMMAND) do
+            Launchy.open("https://github.com/FrancescoLimoni/P.I.E")
+            puts 'opening browser link'
+        end
+        #**************************************************************************
+        gitHubLink.connect(SEL_COMMAND) do
+            Launchy.open("https://github.com/FrancescoLimoni/P.I.E")
+            puts 'opening gitHub in browser'
         end
     
     end 

@@ -9,6 +9,8 @@ require 'FloatingToolBar.rb'
 require 'layerPanel.rb'
 require 'SplashScreen.rb'
 require 'Color.rb'
+require 'launchy'
+
 
 include Fox
 
