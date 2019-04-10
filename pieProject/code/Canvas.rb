@@ -79,10 +79,18 @@ class Canvas
    end
 
     def setDrawColorViaRGB(r, g, b)
-      puts("draw color set to (" + r + ", " + g + ", " + b + ")")
+      while r > 255
+          r -= 255
+      end
+      while g > 255
+          g -= 255
+      end
+      while b > 255
+          b -= 255
+      end
+      puts("draw color set to RGB values: (" + r.to_s + ", " + g.to_s + ", " + b.to_s + ")")
          @drawColor = FXRGB(r, g, b)
     end
   self.instance_variables
 #self.connect(SEL_PAINT) do |sender, sel, event|
 end
-

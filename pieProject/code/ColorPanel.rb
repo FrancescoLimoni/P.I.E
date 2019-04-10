@@ -16,17 +16,36 @@ class ColorPanel < FXPacker
     
     hFrame = FXHorizontalFrame.new(groupBoxPreset, :opts => LAYOUT_CENTER_X)
     matrix = FXMatrix.new(groupBoxCustom, 3, :opts => MATRIX_BY_ROWS | LAYOUT_CENTER_X)
-    
+    hFrame2 = FXHorizontalFrame.new(groupBoxColorPanel, :opts => LAYOUT_CENTER_X)
+    hFrame3 = FXHorizontalFrame.new(groupBoxColorPanel, :opts => LAYOUT_CENTER_X)
     
     groupBoxColorPanel.backColor  =
     groupBoxPreset.backColor      =
     groupBoxCustom.backColor      =
     matrix.backColor              = 
-    hFrame.backColor              = "Gray69"
+    hFrame.backColor              = 
+    hFrame2.backColor             = "Gray69"
 
+    redTextField = FXTextField.new(hFrame2, 4)
+    greenTextField = FXTextField.new(hFrame2, 4)
+    blueTextField = FXTextField.new(hFrame2, 4)
+    
+    generateButton = FXButton.new(hFrame3, "Set Color")
+    
+    generateButton.connect(SEL_COMMAND) do
+       redValue = [0, redTextField.text.to_i].max
+       #puts ("redValue set to " + redValue.to_s)
+       greenValue = [0, greenTextField.text.to_i].max
+       #puts ("greenValue set to " + greenValue.to_s)
+       blueValue = [0, blueTextField.text.to_i].max
+       #puts ("blueValue set to " + blueValue.to_s)
+       @canvas_window.setDrawColorViaRGB(redValue, greenValue, blueValue)
+    end
+    
     createButtons(hFrame, matrix) #Draws Buttons for color selection
   end
   
+  #creates button matrix for custom pallete and applies a random color.
   def createButtons(framing, groupStyle)
     randColor = Color.new()
     randColorArray = Array.new(15)
