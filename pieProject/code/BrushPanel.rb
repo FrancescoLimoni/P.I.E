@@ -36,15 +36,15 @@ class BrushPanel < FXPacker
       
     brush1.connect(SEL_COMMAND) do
                @canvas_window.setBrushSize(1)
-                   puts ("Set brush type to Brush1")
+                   puts ("Set brush to type 1 (1x1)")
     end
     brush2.connect(SEL_COMMAND) do
                @canvas_window.setBrushSize(2)
-               puts ("Set brush type to Brush2")
+               puts ("Set brush to type 2 (10x10)")
     end
     brush3.connect(SEL_COMMAND) do
                 @canvas_window.setBrushSize(3)
-                puts ("Set brush type to Brush3")
+                puts ("Set brush to type 3 (30x30)")
     end
 #   brush4 = FXButton.new(vframe, "\tfill", b4, :opts => LAYOUT_CENTER_X)
 #     brush4.buttonStyle |= BUTTON_TOOLBAR
