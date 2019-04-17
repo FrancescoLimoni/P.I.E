@@ -51,9 +51,12 @@ class Canvas
         dc.foreground = @drawColor
         #dc.fillRectangle(event.win_x, event.win_y, 2, 2)
         
-        dc.drawLine(event.last_x, event.last_y, event.win_x, event.win_y)
         
+        if @brushSize == 1 || @brushSize == 2 || @brushSize == 3
+          dc.drawLine(event.last_x, event.last_y, event.win_x, event.win_y)
+        end
         if @brushSize == 2
+          
           i=0
           while i < 10
               dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
@@ -83,7 +86,11 @@ class Canvas
                i += 1
              end
         end
-        
+        if @brushSize == 4
+          puts("In Draw 4")
+          dc.foreground = @drawColor
+          dc.fillRectangle(event.rect.x, event.rect.y, event.rect.w + @canvas.width,  event.rect.h + @canvas.height)
+        end
 
         # We have drawn something, so now the canvas is dirty
         @dirty = true
@@ -107,6 +114,7 @@ class Canvas
    end
    
    def setBrushSize(size)
+        puts("Brush size updated")
         @brushSize = size
    end
    
