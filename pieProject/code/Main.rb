@@ -11,12 +11,9 @@ require 'SplashScreen.rb'
 require 'Color.rb'
 require 'launchy'
 
-
 include Fox
 
 class EditorWindow < FXMainWindow
-
-
   def initialize(app,logo,w,h)
     super(app, "PIE", logo, logo, :width => w, :height => h)
     #addMenuBar
@@ -59,10 +56,6 @@ if __FILE__ == $0
     splash_screen = SplashScreen.new(editor_window, LAYOUT_CENTER_X | LAYOUT_CENTER_Y)
     #add friend funtion from splashscreen to menuBar via editor_window
     editor_window.editMenuBar(splash_screen)
-
-    #For use with setting the custom color pallete buttons...
-    #custom_RGB_panel = FXFloatingWindow.new(editor_window, LAYOUT_SIDE_LEFT)
-    #splash_screen.addHideElement(custom_RGB_panel.getToolBar,editor_window)
     
     #adding floating ui to this brush_tool_bar
     brush_tool_bar = FloatingToolBar.new(editor_window, LAYOUT_SIDE_LEFT)
@@ -81,8 +74,6 @@ if __FILE__ == $0
     #adding floating ui to layerPanel
     layer_tool_bar = FloatingToolBar.new(frameV,LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X)
     splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
-
-    
 
     canvasPacker = FXPacker.new(editor_window, LAYOUT_FILL_X|LAYOUT_FILL_Y)
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
