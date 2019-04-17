@@ -80,7 +80,7 @@ if __FILE__ == $0
     canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
     
-    brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196, canvas_window)
+    brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,260, canvas_window)
     brush_window.backColor = "Gray69"
     splash_screen.addHideElement(brush_window,editor_window)
     
