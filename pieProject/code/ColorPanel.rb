@@ -25,7 +25,8 @@ class ColorPanel < FXPacker
     groupBoxCustom.backColor      =
     matrix.backColor              = 
     hFrame.backColor              = 
-    hFrame2.backColor             = "Gray69"
+    hFrame2.backColor             = 
+    hFrame3.backColor             = "Gray69"
 
     @redTextField = FXTextField.new(hFrame2, 4)
     @greenTextField = FXTextField.new(hFrame2, 4)
