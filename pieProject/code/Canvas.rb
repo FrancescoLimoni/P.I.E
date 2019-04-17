@@ -1,5 +1,6 @@
 $LOAD_PATH << '.'
 require 'fox16'
+require 'BrushPanel.rb'
 
 include Fox
 
@@ -12,14 +13,13 @@ class Canvas
     @contents = FXHorizontalFrame.new(p, opts, x, y, width, height,
      padLeft, padRight, padTop, padBottom)
      
+    @brushSize = 1
     @canvas_frame = FXVerticalFrame.new(@contents,FRAME_SUNKEN|LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 
    0, 0, 0, 0, 0, 0, 0, 0) 
     
-    @canvas = FXCanvas.new(@canvas_frame, nil, 0, LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 0, 0, 0, 0,) 
+    @canvas = FXCanvas.new(@canvas_frame, nil, 0, LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 0, 0, 0, 0)
   
-  
-  
-    @drawColor = FXRGB(255, 0, 0)
+    @drawColor = FXRGB(0, 0, 0) #Set initial draw color to black
     @mouseDown = false
     @dirty = false
     @brushWidth = 10
@@ -49,9 +49,41 @@ class Canvas
 
         # Set the foreground color for drawing
         dc.foreground = @drawColor
-        
         #dc.fillRectangle(event.win_x, event.win_y, 2, 2)
+        
         dc.drawLine(event.last_x, event.last_y, event.win_x, event.win_y)
+        
+        if @brushSize == 2
+          i=0
+          while i < 10
+              dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
+              dc.drawLine(event.last_x, event.last_y+i, event.win_x, event.win_y+i)
+              dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
+              dc.drawLine(event.last_x+i, event.last_y+i, event.win_x, event.win_y)
+              dc.drawLine(event.last_x, event.last_y, event.win_x+i, event.win_y+i)
+              dc.drawLine(event.last_x+i, event.last_y, event.win_x, event.win_y+i)
+              dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y)
+              dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y+i)
+              dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y)
+              i += 1
+           end
+        end
+        if @brushSize == 3
+            i=0
+            while i < 30
+               dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
+               dc.drawLine(event.last_x, event.last_y+i, event.win_x, event.win_y+i)
+               dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
+               dc.drawLine(event.last_x+i, event.last_y+i, event.win_x, event.win_y)
+               dc.drawLine(event.last_x, event.last_y, event.win_x+i, event.win_y+i)
+               dc.drawLine(event.last_x+i, event.last_y, event.win_x, event.win_y+i)
+               dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y)
+               dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y+i)
+               dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y)
+               i += 1
+             end
+        end
+        
 
         # We have drawn something, so now the canvas is dirty
         @dirty = true
@@ -73,12 +105,17 @@ class Canvas
       end
     end
    end
-      def setDrawColor(color)
+   
+   def setBrushSize(size)
+        @brushSize = size
+   end
+   
+   def setDrawColor(color)
       puts("draw color set to " + color)
       @drawColor = color
    end
 
-    def setDrawColorViaRGB(r, g, b)
+   def setDrawColorViaRGB(r, g, b)
       while r > 255
           r -= 255
       end
@@ -89,8 +126,8 @@ class Canvas
           b -= 255
       end
       puts("draw color set to RGB values: (" + r.to_s + ", " + g.to_s + ", " + b.to_s + ")")
-         @drawColor = FXRGB(r, g, b)
-    end
+      @drawColor = FXRGB(r, g, b)
+   end
   self.instance_variables
 #self.connect(SEL_PAINT) do |sender, sel, event|
 end

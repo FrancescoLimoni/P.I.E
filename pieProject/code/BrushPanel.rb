@@ -1,11 +1,13 @@
 require 'fox16'
+require 'Canvas.rb'
 
 include Fox
 
 class BrushPanel < FXPacker
-  def initialize(parent,opts,x,y,width,height)
-    super
+  def initialize(parent,opts,x,y,width,height, c)
+    super(parent, opts, x, y, width, height)
     
+    @canvas_window = c
     #Upload PNG images to be used# 
     
     b1 = loadIcon("BrushIcon1.png")
@@ -30,6 +32,20 @@ class BrushPanel < FXPacker
       brush3.buttonStyle |= BUTTON_TOOLBAR
       brush3.frameStyle = FRAME_RAISED
       brush3.backColor = "Gray69"
+      
+      
+    brush1.connect(SEL_COMMAND) do
+               @canvas_window.setBrushSize(1)
+                   puts ("Set brush type to Brush1")
+    end
+    brush2.connect(SEL_COMMAND) do
+               @canvas_window.setBrushSize(2)
+               puts ("Set brush type to Brush2")
+    end
+    brush3.connect(SEL_COMMAND) do
+                @canvas_window.setBrushSize(3)
+                puts ("Set brush type to Brush3")
+    end
 #   brush4 = FXButton.new(vframe, "\tfill", b4, :opts => LAYOUT_CENTER_X)
 #     brush4.buttonStyle |= BUTTON_TOOLBAR
 #     brush4.frameStyle = FRAME_RAISED
