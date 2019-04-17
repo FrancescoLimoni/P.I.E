@@ -13,7 +13,7 @@ class BrushPanel < FXPacker
     b1 = loadIcon("BrushIcon1.png")
     b2 = loadIcon("BrushIcon2.png")
     b3 = loadIcon("BrushIcon3.png")
-#   b4 = loadIcon("BrushIcon4.png")
+    b4 = loadIcon("BrushIcon4.png")
 
     #Display images as clickable buttons#
 
@@ -32,23 +32,27 @@ class BrushPanel < FXPacker
       brush3.buttonStyle |= BUTTON_TOOLBAR
       brush3.frameStyle = FRAME_RAISED
       brush3.backColor = "Gray69"
-      
+    brush4 = FXButton.new(vframe, "\tfill", b4, :opts => LAYOUT_CENTER_X)
+      brush4.buttonStyle |= BUTTON_TOOLBAR
+      brush4.frameStyle = FRAME_RAISED
+      brush4.backColor = "Gray69"
       
     brush1.connect(SEL_COMMAND) do
-               @canvas_window.setBrushSize(1)
-                   puts ("Set brush to type 1 (1x1)")
+          @canvas_window.setBrushSize(1)
+          puts ("Set brush to type 1 (1x1)")
     end
     brush2.connect(SEL_COMMAND) do
-               @canvas_window.setBrushSize(2)
-               puts ("Set brush to type 2 (10x10)")
+          @canvas_window.setBrushSize(2)
+          puts ("Set brush to type 2 (10x10)")
     end
     brush3.connect(SEL_COMMAND) do
-                @canvas_window.setBrushSize(3)
-                puts ("Set brush to type 3 (30x30)")
+          @canvas_window.setBrushSize(3)
+          puts ("Set brush to type 3 (30x30)")
     end
-#   brush4 = FXButton.new(vframe, "\tfill", b4, :opts => LAYOUT_CENTER_X)
-#     brush4.buttonStyle |= BUTTON_TOOLBAR
-#     brush4.frameStyle = FRAME_RAISED
+    brush4.connect(SEL_COMMAND) do
+          @canvas_window.setBrushSize(4)
+          puts ("Set brush to type 4 (fill)")
+    end
 
   end
   
