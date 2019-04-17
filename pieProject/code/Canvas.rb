@@ -12,8 +12,7 @@ class Canvas
   def initialize(p, opts, x, y, width, height, padLeft, padRight, padTop, padBottom)
     @contents = FXHorizontalFrame.new(p, opts, x, y, width, height,
      padLeft, padRight, padTop, padBottom)
-     
-    @brushSize = 1
+    
     @canvas_frame = FXVerticalFrame.new(@contents,FRAME_SUNKEN|LAYOUT_FILL_X|LAYOUT_FILL_Y|LAYOUT_TOP|LAYOUT_LEFT, 
    0, 0, 0, 0, 0, 0, 0, 0) 
     
@@ -23,7 +22,8 @@ class Canvas
     @mouseDown = false
     @dirty = false
     @brushWidth = 10
-    @brushHeight = 1     
+    @brushHeight = 1
+    @brushSize = 1  
     
     @canvas.connect(SEL_PAINT) do |sender, sel, event|
       FXDCWindow.new(@canvas,event) do |dc|
@@ -127,6 +127,10 @@ class Canvas
       end
       puts("draw color set to RGB values: (" + r.to_s + ", " + g.to_s + ", " + b.to_s + ")")
       @drawColor = FXRGB(r, g, b)
+   end
+   
+   def setDrawColorViaRGBObject(color)
+     @drawColor = color
    end
   self.instance_variables
 #self.connect(SEL_PAINT) do |sender, sel, event|
