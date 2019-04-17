@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Team3 - resources</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 600;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/539956456070578186/8f438bdba6f0dd78170f6bb997f20a53.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">Team3</div>
+        <div class="info__channel-name">resources</div>
+        
+
+        <div class="info__channel-message-count">28 messages</div>
+        
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/275355242659446785/b5a2e3f5c84d5592955c075399c8bee7.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Dustin#0446">Dustin</span>
+                <span class="chatlog__timestamp">29-Jan-19 05:25 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Post links to resources, APIS, tutorials, etc.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Pinned a message.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.tutorialspoint.com/ruby/">https://www.tutorialspoint.com/ruby/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.tutorialspoint.com/ruby/"><span class="markdown">Ruby Tutorial</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Ruby Tutorial for Beginners - Learn Ruby in simple and easy steps starting from basic to advanced concepts with examples including Overview, Environment Setup, Syntax, Classes, Variables, Operators, Comments, If...else, case, unless, Loops, File, I/O, Functions, Objects, TK, ...</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.ruby-lang.org/en/documentation/quickstart/">https://www.ruby-lang.org/en/documentation/quickstart/</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.codecademy.com/learn/learn-ruby">https://www.codecademy.com/learn/learn-ruby</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.codecademy.com/learn/learn-ruby"><span class="markdown">Ruby Tutorial: Learn Ruby For Free | Codecademy</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Learn Ruby, a ﬂexible language used to create sites like Codecademy. Ruby is a powerful language  for professional web apps all over the world. Discover Ruby arrays - a fundamental pillar of Ruby.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://www.codecademy.com/assets/logo-codecademy-social-abfd8450722d675bddedde689f8af624.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://www.codecademy.com/assets/logo-codecademy-social-abfd8450722d675bddedde689f8af624.png" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="http://shoesrb.com/walkthrough/">http://shoesrb.com/walkthrough/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://shoesrb.com/walkthrough/"><span class="markdown">Shoes! The easiest little GUI toolkit, for Ruby.</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">The website for Shoes, a GUI toolkit for Ruby</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">A free Ruby IDE <a href="http://www.aptana.com/">http://www.aptana.com/</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://ruby-doc.org/core-2.6/">https://ruby-doc.org/core-2.6/</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://programmingdesignsystems.com/color/color-schemes/index.html">https://programmingdesignsystems.com/color/color-schemes/index.html</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/468957270927998977/51511e6bcf896b21718a5a0eee9f64b6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jacobdwatters#4615">jacobdwatters</span>
+                <span class="chatlog__timestamp">30-Jan-19 08:28 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I found a good Eclipse plugin for Ruby. <a href="https://marketplace.eclipse.org/content/ruby-dltk">https://marketplace.eclipse.org/content/ruby-dltk</a>. You will need to set up  the interpreter.</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/539956814976909356/540191692142149663/Screen_Shot_2019-01-30_at_8.27.43_AM.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/539956814976909356/540191692142149663/Screen_Shot_2019-01-30_at_8.27.43_AM.png" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/468957270927998977/51511e6bcf896b21718a5a0eee9f64b6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jacobdwatters#4615">jacobdwatters</span>
+                <span class="chatlog__timestamp">30-Jan-19 04:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Something we should look into <a href="https://www.sitepoint.com/drawing-processing-ruby/">https://www.sitepoint.com/drawing-processing-ruby/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.sitepoint.com/author/dpandya/">Dhaivat Pandya</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.sitepoint.com/drawing-processing-ruby/"><span class="markdown">Drawing with Processing and Ruby — SitePoint</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Processing is an environment/programming language that is meant to make visual, interactive applications extremely easy to write. It can be used for everything from teaching children how to code to visualizing scientific data. Fortunately, all of this goodness is no longer bo...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/icon.ruby.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/icon.ruby.png" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/275355242659446785/b5a2e3f5c84d5592955c075399c8bee7.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Dustin#0446">Dustin</span>
+                <span class="chatlog__timestamp">30-Jan-19 05:46 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://rubygems.org/gems/ruby-processing">https://rubygems.org/gems/ruby-processing</a>
+
+Processing is a gem rapper for a java based programming language that lets you write it in ruby. It looks very powerful.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That being said, it&#39;s not compatible with shoes, which means well have to program the GUI by hand.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="sirKnight#1168">sirKnight</span>
+                <span class="chatlog__timestamp">31-Jan-19 01:56 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://stackoverflow.com/questions/1654815/can-ruby-be-used-to-develop-simple-windows-applications">https://stackoverflow.com/questions/1654815/can-ruby-be-used-to-develop-simple-windows-applications</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://stackoverflow.com/questions/1654815/can-ruby-be-used-to-develop-simple-windows-applications"><span class="markdown">Can Ruby be used to develop simple Windows applications?</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">I&#39;ve been developing Windows based applications for a long time and most of my present clients still desire a desktop or client/server Windows application. Is it possible to use Ruby for such</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+                                                <img class="chatlog__embed-thumbnail" src="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/275355242659446785/b5a2e3f5c84d5592955c075399c8bee7.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Dustin#0446">Dustin</span>
+                <span class="chatlog__timestamp">31-Jan-19 02:03 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://github.com/larskanis/fxruby">https://github.com/larskanis/fxruby</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/larskanis/fxruby"><span class="markdown">larskanis/fxruby</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">FXRuby is an extension module for Ruby that provides an interface to the FOX GUI toolkit. - larskanis/fxruby</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://avatars0.githubusercontent.com/u/176234?s=400&v=4">
+                                                <img class="chatlog__embed-thumbnail" src="https://avatars0.githubusercontent.com/u/176234?s=400&v=4" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/468957270927998977/51511e6bcf896b21718a5a0eee9f64b6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jacobdwatters#4615">jacobdwatters</span>
+                <span class="chatlog__timestamp">31-Jan-19 03:04 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">fxruby Tutorial: <a href="https://www.youtube.com/watch?v=JSb0YhotF4Q">https://www.youtube.com/watch?v=JSb0YhotF4Q</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="31-Jan-19 03:04 PM">(edited)</span>
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/devnami">DevNami</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=JSb0YhotF4Q"><span class="markdown">FXRuby GUI Toolkit Tutorial</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Learn how to create FXRuby GUI toolkit.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/JSb0YhotF4Q/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/JSb0YhotF4Q/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/539603087112011777/a3e16628bfead0fcd7efedb8cc7bb24e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Lemon#0750">Lemon</span>
+                <span class="chatlog__timestamp">31-Jan-19 03:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Visual Ruby: <a href="http://visualruby.net">http://visualruby.net</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="31-Jan-19 03:14 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/468957270927998977/51511e6bcf896b21718a5a0eee9f64b6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jacobdwatters#4615">jacobdwatters</span>
+                <span class="chatlog__timestamp">05-Feb-19 11:03 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">FXRuby Fox module documentation (Note the FXCanvas class which inherits FXWindow which then inherits FXDrawable): <a href="https://www.rubydoc.info/gems/fxruby/Fox">https://www.rubydoc.info/gems/fxruby/Fox</a>     Unsure how to implement as of now, but it is reassuring that these classes exist within the FXRuby library.</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Feb-19 11:04 AM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/468957270927998977/51511e6bcf896b21718a5a0eee9f64b6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jacobdwatters#4615">jacobdwatters</span>
+                <span class="chatlog__timestamp">05-Feb-19 11:10 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Book Written by creator of FXRuby: <a href="http://index-of.es/Ruby/FXRuby%2520-%2520Create%2520Lean%2520and%2520Mean%2520GUIs%2520with%2520Ruby%2520(2008).pdf">http://index-of.es/Ruby/FXRuby%20-%20Create%20Lean%20and%20Mean%20GUIs%20with%20Ruby%20(2008).pdf</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="sirKnight#1168">sirKnight</span>
+                <span class="chatlog__timestamp">05-Feb-19 03:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">tech Writing</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/539956814976909356/542468837518606356/MEMORANDUM_HW1.docx">
+                                
+                                    Attachment: MEMORANDUM_HW1.docx (16.14 KB)
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="sirKnight#1168">sirKnight</span>
+                <span class="chatlog__timestamp">16-Feb-19 07:42 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">hey everyone here is a link for how to create a floating object with ruby. long story short, we have to initilize a empty space called &quot;docker&quot;, we treat the docker in terms of layout as any other packer element. however, we can grab the floating bar we want anywhere on our PC, even outside our app. I have created a &quot;issue&quot; on github for myself so that I will program a method for all of you to use to create a floating UI for your perspective element. in the mean time the folowing code is how you do it: <a href="https://github.com/OmarBitar/floatingUIRuby">https://github.com/OmarBitar/floatingUIRuby</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/OmarBitar/floatingUIRuby"><span class="markdown">OmarBitar/floatingUIRuby</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Contribute to OmarBitar/floatingUIRuby development by creating an account on GitHub.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://avatars2.githubusercontent.com/u/28638350?s=400&v=4">
+                                                <img class="chatlog__embed-thumbnail" src="https://avatars2.githubusercontent.com/u/28638350?s=400&v=4" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">you can find the explanation on page 195 in the book that <span class="mention" title="jacobdwatters#4615">@jacobdwatters</span> shared</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/540299139787915284/6fb1a48c99543808f1682daa666264ad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="nick0j0m#4560">nick0j0m</span>
+                <span class="chatlog__timestamp">16-Feb-19 07:44 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Thanks!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="sirKnight#1168">sirKnight</span>
+                <span class="chatlog__timestamp">16-Feb-19 07:44 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">no problem.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="sirKnight#1168">sirKnight</span>
+                <span class="chatlog__timestamp">26-Feb-19 02:40 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://github.com/FrancescoLimoni/Pixel-Image-Editor.git">https://github.com/FrancescoLimoni/Pixel-Image-Editor.git</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/FrancescoLimoni/Pixel-Image-Editor.git"><span class="markdown">FrancescoLimoni/Pixel-Image-Editor</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Contribute to FrancescoLimoni/Pixel-Image-Editor development by creating an account on GitHub.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://avatars0.githubusercontent.com/u/16048553?s=400&v=4">
+                                                <img class="chatlog__embed-thumbnail" src="https://avatars0.githubusercontent.com/u/16048553?s=400&v=4" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://drive.google.com/file/d/1S2GZZzdUqtTJA2KX2PEB-0kuYPZCei5h/view?usp=sharing">https://drive.google.com/file/d/1S2GZZzdUqtTJA2KX2PEB-0kuYPZCei5h/view?usp=sharing</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://drive.google.com/file/d/1S2GZZzdUqtTJA2KX2PEB-0kuYPZCei5h/view?usp=sharing"><span class="markdown">Untitled Diagram.html</span></a>
+                                            </div>
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://lh3.googleusercontent.com/v6uSDBuc1yiEgHL4Keo87UIFfajI8P5x1R9QNG41Hse0O2EMf1CG73cIGRk=w1200-h630-p">
+                                                <img class="chatlog__embed-thumbnail" src="https://lh3.googleusercontent.com/v6uSDBuc1yiEgHL4Keo87UIFfajI8P5x1R9QNG41Hse0O2EMf1CG73cIGRk=w1200-h630-p" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="sirKnight#1168">sirKnight</span>
+                <span class="chatlog__timestamp">26-Feb-19 02:54 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://github.com/OmarBitar/fxRubyMatrixColor">https://github.com/OmarBitar/fxRubyMatrixColor</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/OmarBitar/fxRubyMatrixColor"><span class="markdown">OmarBitar/fxRubyMatrixColor</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Contribute to OmarBitar/fxRubyMatrixColor development by creating an account on GitHub.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://avatars2.githubusercontent.com/u/28638350?s=400&v=4">
+                                                <img class="chatlog__embed-thumbnail" src="https://avatars2.githubusercontent.com/u/28638350?s=400&v=4" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="sirKnight#1168">sirKnight</span>
+                <span class="chatlog__timestamp">02-Apr-19 03:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">EXPORTING IMAGE with fxruby</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/539956814976909356/562750116990287882/image.rb">
+                                
+                                    Attachment: image.rb (8.68 KB)
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
