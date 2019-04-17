@@ -56,12 +56,16 @@ if __FILE__ == $0
     #rightVFrame = FXHorizontalFrame.new(groupBoxV) 
     
     #create a splash screen object with editor_window as its scope
-    splash_screen = SplashScreen.new(editor_window,LAYOUT_CENTER_X | LAYOUT_CENTER_Y)
+    splash_screen = SplashScreen.new(editor_window, LAYOUT_CENTER_X | LAYOUT_CENTER_Y)
     #add friend funtion from splashscreen to menuBar via editor_window
     editor_window.editMenuBar(splash_screen)
 
+    #For use with setting the custom color pallete buttons...
+    #custom_RGB_panel = FXFloatingWindow.new(editor_window, LAYOUT_SIDE_LEFT)
+    #splash_screen.addHideElement(custom_RGB_panel.getToolBar,editor_window)
+    
     #adding floating ui to this brush_tool_bar
-    brush_tool_bar = FloatingToolBar.new(editor_window,LAYOUT_SIDE_LEFT)
+    brush_tool_bar = FloatingToolBar.new(editor_window, LAYOUT_SIDE_LEFT)
     splash_screen.addHideElement(brush_tool_bar.getToolBar,editor_window)
 
     #make layer panel and color panel on top of each other
@@ -69,7 +73,7 @@ if __FILE__ == $0
     splash_screen.addHideElement(frameV,editor_window)
 
     #adding floating ui to color_window
-    color_tool_bar = FloatingToolBar.new(frameV,LAYOUT_SIDE_RIGHT)
+    color_tool_bar = FloatingToolBar.new(frameV, LAYOUT_SIDE_RIGHT)
     #adding empty dock for all toolbar objects
     color_tool_bar.addDock(LAYOUT_SIDE_RIGHT)
     splash_screen.addHideElement(color_tool_bar.getToolBar,editor_window)
@@ -78,15 +82,16 @@ if __FILE__ == $0
     layer_tool_bar = FloatingToolBar.new(frameV,LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X)
     splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
 
-    brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196)
-    brush_window.backColor = "Gray69"
-    splash_screen.addHideElement(brush_window,editor_window)
+    
 
-
-    canvasPacker = FXPacker.new(editor_window,LAYOUT_FILL_X|LAYOUT_FILL_Y)
+    canvasPacker = FXPacker.new(editor_window, LAYOUT_FILL_X|LAYOUT_FILL_Y)
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
     canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
+    
+    brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,196, canvas_window)
+    brush_window.backColor = "Gray69"
+    splash_screen.addHideElement(brush_window,editor_window)
     
     color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 150, 280, canvas_window)
     color_window.backColor = "Gray69"
