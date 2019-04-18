@@ -40,15 +40,15 @@ class BrushPanel < FXPacker
       brush3.buttonStyle |= BUTTON_TOOLBAR
       brush3.frameStyle = FRAME_RAISED
       brush3.backColor = "Gray69"
-    brush6 = FXButton.new(vframe, "\tfill", b6, :opts => LAYOUT_CENTER_X)
+    brush6 = FXButton.new(vframe, "\tInk Pen", b6, :opts => LAYOUT_CENTER_X)
       brush6.buttonStyle |= BUTTON_TOOLBAR
       brush6.frameStyle = FRAME_RAISED
       brush6.backColor = "Gray69"
-    brush4 = FXButton.new(vframe, "\tfill", b4, :opts => LAYOUT_CENTER_X)
+    brush4 = FXButton.new(vframe, "\tFill", b4, :opts => LAYOUT_CENTER_X)
       brush4.buttonStyle |= BUTTON_TOOLBAR
       brush4.frameStyle = FRAME_RAISED
       brush4.backColor = "Gray69"
-    brush5 = FXButton.new(vframe, "\tfill", b5, :opts => LAYOUT_CENTER_X)
+    brush5 = FXButton.new(vframe, "\tEraser", b5, :opts => LAYOUT_CENTER_X)
           brush5.buttonStyle |= BUTTON_TOOLBAR
           brush5.frameStyle = FRAME_RAISED
           brush5.backColor = "Gray69"
