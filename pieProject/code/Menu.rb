@@ -107,8 +107,9 @@ class MenuBar
         end
         #**************************************************************************
         aboutTab.connect(SEL_COMMAND) do
-            Launchy.open("https://github.com/FrancescoLimoni/P.I.E")
-            puts 'opening browser link'
+            #Launchy.open("https://github.com/FrancescoLimoni/P.I.E")
+            puts 'opened browser'
+            Launchy.open(File.expand_path("../..", Dir.pwd)+"/PIEDOC.html")
         end
         #**************************************************************************
         gitHubLink.connect(SEL_COMMAND) do
