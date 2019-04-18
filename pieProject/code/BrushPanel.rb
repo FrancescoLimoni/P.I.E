@@ -8,15 +8,19 @@ class BrushPanel < FXPacker
     super(parent, opts, x, y, width, height)
     
     @canvas_window = c
+    @eraserSelect = false
+
     #Upload PNG images to be used# 
-    @eraiserSelect = false
     @lastDrawColor = @canvas_window.getDrawColor()
     
+    #Upload PNG images to be used#
     b1 = loadIcon("BrushIcon1.png")
     b2 = loadIcon("BrushIcon2.png")
     b3 = loadIcon("BrushIcon3.png")
     b4 = loadIcon("BrushIcon4.png")
-    b5 = loadIcon("EraiserIcon.png")
+
+    b5 = loadIcon("EraserIcon.png")
+
 
     #Display images as clickable buttons#
 
@@ -45,43 +49,43 @@ class BrushPanel < FXPacker
           brush5.backColor = "Gray69"
       
     brush1.connect(SEL_COMMAND) do
-      if @eraiserSelect == true
+      if @eraserSelect == true
         @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
-        @eraiserSelect = false
+        @eraserSelect = false
       end
       @canvas_window.setBrushSize(1)
       puts ("Set brush to type 1 (1x1)")
     end
     brush2.connect(SEL_COMMAND) do
-      if @eraiserSelect == true
+      if @eraserSelect == true
             @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
-            @eraiserSelect = false
+            @eraserSelect = false
       end
       @canvas_window.setBrushSize(2)
       puts ("Set brush to type 2 (10x10)")
     end
     brush3.connect(SEL_COMMAND) do
-      if @eraiserSelect == true
+      if @eraserSelect == true
         puts("----------------In If----------------")
             @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
-            @eraiserSelect = false
+            @eraserSelect = false
       end
       @canvas_window.setBrushSize(3)
       puts ("Set brush to type 3 (30x30)")
     end
     brush4.connect(SEL_COMMAND) do
-      if @eraiserSelect == true
+      if @eraserSelect == true
             @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
-            @eraiserSelect = false
+            @eraserSelect = false
       end
       @canvas_window.setBrushSize(4)
           puts ("Set brush to type 4 (fill)")
     end
     brush5.connect(SEL_COMMAND) do
-        @eraiserSelect = true
+        @eraserSelect = true
         @lastDrawColor = @canvas_window.getDrawColor()
          @canvas_window.setDrawColor("White")
-         puts ("Set brush to type 5 (Eraiser)")
+         puts ("Set brush to type 5 (eraser)")
     end
   end
   
