@@ -1,3 +1,4 @@
+
 $LOAD_PATH << '.'
 require 'fox16'
 require 'BrushPanel.rb'
@@ -253,8 +254,9 @@ class Canvas
       puts("Create image")
     end
     
-    def save(sender, sel, ptr)
-      sdc = FXDCWindow.new(@exportImage, event)
+    def save
+      #sdc = FXDCWindow.new(@exportImage, event)
+      sdc = FXDCWindow.new(@exportImage)
       sdc.foreground = FXRGB(255, 255, 255)
       sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
       

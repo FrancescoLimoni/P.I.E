@@ -2,7 +2,8 @@ class MenuBar
     def initialize(app,x,y,z)
         puts "creating menu bar"
 
-        @friendObject = nil
+        @splashScreenFriendObject = nil
+        @canvasSaveMethod = nil
   
         # set up menu LayerPanel properties ======================================
 
@@ -46,19 +47,23 @@ class MenuBar
             #under 'About' tab
         aboutCmd = FXMenuCommand.new(about, "contact us") 
         
-        
         #splash screen friend function=================================================
         def splashScreenFriendfunction(splahsScreenObject)
-            @friendObject = splahsScreenObject
+            @splashScreenFriendObject = splahsScreenObject
+        end
+        #splash screen friend function=================================================
+        def canvasSaveFriendfunction(canvasObject)
+            @canvasSaveMethod = canvasObject
         end
         #connect sub menue Items to functions =====================================
         fileNew.connect(SEL_COMMAND) do
-            @friendObject.forFriendfunctions
+            # 'forFriendfunctions' is defined in the splashScreen class
+            @splashScreenFriendObject.forFriendfunctions
         end
         #**************************************************************************
         newCmd.connect(SEL_COMMAND) do
             #@txt.text = ""
-            @friendObject.forFriendfunctions
+            @splashScreenFriendObject.forFriendfunctions
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  
@@ -80,21 +85,15 @@ class MenuBar
         end  
         #**************************************************************************
         saveCmd.connect(SEL_COMMAND) do
-            dialog = FXFileDialog.new(x, "Save a File")  
-            dialog.selectMode = SELECTFILE_EXISTING  
-            dialog.patternList = ["All Files (*)"]  
-            if dialog.execute != 0  
-                save_file(dialog.filename)  
-            end
+            #save method defined in canvas
+            @canvasSaveMethod.save
+            puts ('long save')
         end
         #**************************************************************************
         fileSave_s.connect(SEL_COMMAND) do
-            dialog = FXFileDialog.new(x, "Save a File")  
-            dialog.selectMode = SELECTFILE_EXISTING  
-            dialog.patternList = ["All Files (*)"]  
-            if dialog.execute != 0  
-                save_file(dialog.filename)  
-            end
+            #save method defined in canvas
+            @canvasSaveMethod.save
+            puts ('long save')
         end
         #**************************************************************************
         fileSave.connect(SEL_COMMAND) do
