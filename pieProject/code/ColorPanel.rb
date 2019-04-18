@@ -28,9 +28,9 @@ class ColorPanel < FXPacker
     hFrame2.backColor             = 
     hFrame3.backColor             = "Gray69"
 
-    @redTextField = FXTextField.new(hFrame2, 4)
-    @greenTextField = FXTextField.new(hFrame2, 4)
-    @blueTextField = FXTextField.new(hFrame2, 4)
+    @redTextField = FXTextField.new(hFrame2, 3, :opts => FRAME_SUNKEN|FRAME_THICK|TEXTFIELD_REAL|TEXTFIELD_LIMITED)
+    @greenTextField = FXTextField.new(hFrame2, 3, :opts => FRAME_SUNKEN|FRAME_THICK|TEXTFIELD_REAL|TEXTFIELD_LIMITED)
+    @blueTextField = FXTextField.new(hFrame2, 3, :opts => FRAME_SUNKEN|FRAME_THICK|TEXTFIELD_REAL|TEXTFIELD_LIMITED)
     
     generateButton = FXButton.new(hFrame3, "Set Color")
     generateButton.connect(SEL_COMMAND) do
