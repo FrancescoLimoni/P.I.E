@@ -34,7 +34,7 @@ class Canvas
     0, 0, 0, 0, 0, 0, 0, 0) 
     
     #Image stores the image data that is saved.
-    @exportImage = FXBMPImage.new(app, nil, width, height)
+    @exportImage = FXPNGImage.new(app, nil, width, height)
     @exportImage.create                 #initializes the image object.
     @exportImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
     
