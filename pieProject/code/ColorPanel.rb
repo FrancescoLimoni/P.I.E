@@ -48,7 +48,7 @@ class ColorPanel < FXPacker
     #Creates 5X3 Button matrix
     1.upto(15) do |i|
       customColorArray.insert(i-1, Fox.FXRGB(255, 255, 255))
-      rand = FXButton.new(groupStyle, "-").backColor = "white"
+      rand = FXButton.new(groupStyle, " ").backColor = "white"
       #rand.connect(SEL_COMMAND) do | sender, sel, data|
             #@canvas_window.setDrawColor(color)
       #end
