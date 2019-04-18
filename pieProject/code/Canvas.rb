@@ -87,7 +87,6 @@ class Canvas
              end
         end
         if @brushSize == 4
-          puts("In Draw 4")
           dc.foreground = @drawColor
           dc.fillRectangle(event.rect.x, event.rect.y, event.rect.w + @canvas.width,  event.rect.h + @canvas.height)
         end
@@ -123,6 +122,10 @@ class Canvas
       @drawColor = color
    end
 
+   def getDrawColor()
+     return @drawColor
+   end
+   
    def setDrawColorViaRGB(r, g, b)
       while r > 255
           r -= 255

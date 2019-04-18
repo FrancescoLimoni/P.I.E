@@ -9,11 +9,14 @@ class BrushPanel < FXPacker
     
     @canvas_window = c
     #Upload PNG images to be used# 
+    @eraiserSelect = false
+    @lastDrawColor = @canvas_window.getDrawColor()
     
     b1 = loadIcon("BrushIcon1.png")
     b2 = loadIcon("BrushIcon2.png")
     b3 = loadIcon("BrushIcon3.png")
     b4 = loadIcon("BrushIcon4.png")
+    b5 = loadIcon("EraiserIcon.png")
 
     #Display images as clickable buttons#
 
@@ -36,24 +39,50 @@ class BrushPanel < FXPacker
       brush4.buttonStyle |= BUTTON_TOOLBAR
       brush4.frameStyle = FRAME_RAISED
       brush4.backColor = "Gray69"
+    brush5 = FXButton.new(vframe, "\tfill", b5, :opts => LAYOUT_CENTER_X)
+          brush5.buttonStyle |= BUTTON_TOOLBAR
+          brush5.frameStyle = FRAME_RAISED
+          brush5.backColor = "Gray69"
       
     brush1.connect(SEL_COMMAND) do
-          @canvas_window.setBrushSize(1)
-          puts ("Set brush to type 1 (1x1)")
+      if @eraiserSelect == true
+        @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
+        @eraiserSelect = false
+      end
+      @canvas_window.setBrushSize(1)
+      puts ("Set brush to type 1 (1x1)")
     end
     brush2.connect(SEL_COMMAND) do
-          @canvas_window.setBrushSize(2)
-          puts ("Set brush to type 2 (10x10)")
+      if @eraiserSelect == true
+            @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
+            @eraiserSelect = false
+      end
+      @canvas_window.setBrushSize(2)
+      puts ("Set brush to type 2 (10x10)")
     end
     brush3.connect(SEL_COMMAND) do
-          @canvas_window.setBrushSize(3)
-          puts ("Set brush to type 3 (30x30)")
+      if @eraiserSelect == true
+        puts("----------------In If----------------")
+            @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
+            @eraiserSelect = false
+      end
+      @canvas_window.setBrushSize(3)
+      puts ("Set brush to type 3 (30x30)")
     end
     brush4.connect(SEL_COMMAND) do
-          @canvas_window.setBrushSize(4)
+      if @eraiserSelect == true
+            @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
+            @eraiserSelect = false
+      end
+      @canvas_window.setBrushSize(4)
           puts ("Set brush to type 4 (fill)")
     end
-
+    brush5.connect(SEL_COMMAND) do
+        @eraiserSelect = true
+        @lastDrawColor = @canvas_window.getDrawColor()
+         @canvas_window.setDrawColor("White")
+         puts ("Set brush to type 5 (Eraiser)")
+    end
   end
   
   def loadIcon(filename)
