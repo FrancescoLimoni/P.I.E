@@ -71,7 +71,7 @@ class Canvas
               i += 1
            end
         end
-        if @brushSize == 3
+        if @brushSize == 3 || @brushSize == 5
             i=0
             while i < 30
                dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
@@ -89,6 +89,13 @@ class Canvas
         if @brushSize == 4
           dc.foreground = @drawColor
           dc.fillRectangle(event.rect.x, event.rect.y, event.rect.w + @canvas.width,  event.rect.h + @canvas.height)
+        end
+        if @brushSize == 6
+            i=0
+            while i < 10
+                dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
+                 i += 1
+            end
         end
 
         # We have drawn something, so now the canvas is dirty
