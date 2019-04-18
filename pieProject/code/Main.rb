@@ -74,8 +74,8 @@ if __FILE__ == $0
     layer_tool_bar = FloatingToolBar.new(frameV,LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X)
     splash_screen.addHideElement(layer_tool_bar.getToolBar,editor_window)
 
-    canvasPacker = FXPacker.new(editor_window, LAYOUT_FILL_X|LAYOUT_FILL_Y)
-    canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0)
+    canvasPacker = FXPacker.new(editor_window,LAYOUT_FILL_X|LAYOUT_FILL_Y)
+    canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 800, 400, 0, 0, 0, 0, app)
     canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
     
