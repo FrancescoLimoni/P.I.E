@@ -18,8 +18,9 @@ class BrushPanel < FXPacker
     b2 = loadIcon("BrushIcon2.png")
     b3 = loadIcon("BrushIcon3.png")
     b4 = loadIcon("BrushIcon4.png")
-
     b5 = loadIcon("EraserIcon.png")
+    b6 = loadIcon("InkPenIcon.png")
+    
 
 
     #Display images as clickable buttons#
@@ -39,6 +40,10 @@ class BrushPanel < FXPacker
       brush3.buttonStyle |= BUTTON_TOOLBAR
       brush3.frameStyle = FRAME_RAISED
       brush3.backColor = "Gray69"
+    brush6 = FXButton.new(vframe, "\tfill", b6, :opts => LAYOUT_CENTER_X)
+      brush6.buttonStyle |= BUTTON_TOOLBAR
+      brush6.frameStyle = FRAME_RAISED
+      brush6.backColor = "Gray69"
     brush4 = FXButton.new(vframe, "\tfill", b4, :opts => LAYOUT_CENTER_X)
       brush4.buttonStyle |= BUTTON_TOOLBAR
       brush4.frameStyle = FRAME_RAISED
@@ -66,7 +71,6 @@ class BrushPanel < FXPacker
     end
     brush3.connect(SEL_COMMAND) do
       if @eraserSelect == true
-        puts("----------------In If----------------")
             @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
             @eraserSelect = false
       end
@@ -83,11 +87,20 @@ class BrushPanel < FXPacker
     end
     brush5.connect(SEL_COMMAND) do
         @eraserSelect = true
+        @canvas_window.setBrushSize(5)
         @lastDrawColor = @canvas_window.getDrawColor()
-         @canvas_window.setDrawColor("White")
-         puts ("Set brush to type 5 (eraser)")
+        @canvas_window.setDrawColor("White")
+        puts ("Set brush to type 5 (eraser)")
     end
+  brush6.connect(SEL_COMMAND) do
+     if @eraserSelect == true
+          @canvas_window.setDrawColorViaRGBObject(@lastDrawColor)
+          @eraserSelect = false
+     end
+     @canvas_window.setBrushSize(6)
   end
+end
+           
   
   def loadIcon(filename)
     begin
