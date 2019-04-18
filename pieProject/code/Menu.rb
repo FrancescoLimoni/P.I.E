@@ -4,6 +4,7 @@ class MenuBar
 
         @splashScreenFriendObject = nil
         @canvasSaveMethod = nil
+        @friendObject = nil
   
         # set up menu LayerPanel properties ======================================
 
@@ -47,6 +48,7 @@ class MenuBar
             #under 'About' tab
         aboutCmd = FXMenuCommand.new(about, "contact us") 
         
+
         #splash screen friend function=================================================
         def splashScreenFriendfunction(splahsScreenObject)
             @splashScreenFriendObject = splahsScreenObject
@@ -59,11 +61,14 @@ class MenuBar
         fileNew.connect(SEL_COMMAND) do
             # 'forFriendfunctions' is defined in the splashScreen class
             @splashScreenFriendObject.forFriendfunctions
+
         end
         #**************************************************************************
         newCmd.connect(SEL_COMMAND) do
             #@txt.text = ""
+
             @splashScreenFriendObject.forFriendfunctions
+
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  
@@ -94,6 +99,7 @@ class MenuBar
         end
         #**************************************************************************
         fileSave_s.connect(SEL_COMMAND) do
+
             @canvasSaveMethod.save
             puts ('long save')
         end
