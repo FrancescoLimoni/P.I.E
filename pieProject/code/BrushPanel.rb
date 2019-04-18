@@ -9,6 +9,8 @@ class BrushPanel < FXPacker
     
     @canvas_window = c
     @eraserSelect = false
+
+    #Upload PNG images to be used# 
     @lastDrawColor = @canvas_window.getDrawColor()
     
     #Upload PNG images to be used#
@@ -16,7 +18,9 @@ class BrushPanel < FXPacker
     b2 = loadIcon("BrushIcon2.png")
     b3 = loadIcon("BrushIcon3.png")
     b4 = loadIcon("BrushIcon4.png")
+
     b5 = loadIcon("EraserIcon.png")
+
 
     #Display images as clickable buttons#
 
