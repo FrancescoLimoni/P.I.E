@@ -33,7 +33,6 @@ class ColorPanel < FXPacker
     @blueTextField = FXTextField.new(hFrame2, 4)
     
     generateButton = FXButton.new(hFrame3, "Set Color")
-    
     generateButton.connect(SEL_COMMAND) do
        @setCustom = true
     end
