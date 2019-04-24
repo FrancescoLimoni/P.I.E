@@ -59,11 +59,14 @@ class MenuBar
         fileNew.connect(SEL_COMMAND) do
             # 'forFriendfunctions' is defined in the splashScreen class
             @splashScreenFriendObject.forFriendfunctions
+            @canvasSaveMethod.newCanvas
         end
         #**************************************************************************
         newCmd.connect(SEL_COMMAND) do
             #@txt.text = ""
             @splashScreenFriendObject.forFriendfunctions
+            puts('creating new canvas')
+            @canvasSaveMethod.newCanvas
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  
