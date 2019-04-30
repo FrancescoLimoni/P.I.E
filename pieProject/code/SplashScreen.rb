@@ -49,6 +49,14 @@ class SplashScreen < FXPacker
       end
     end
 
+    #this object is when onther function calls this method
+    #it will do what btn.connect does
+    def forFriendfunctions
+      @status = false
+      self.hide
+
+      showElements
+    end
     btn.connect(SEL_COMMAND) do
 
       @status = false
