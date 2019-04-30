@@ -27,6 +27,9 @@ class Canvas
     @dirtyArray = Array.new       #stores the dirty status of each layer.
     @activeIndex = 0
     
+    @saved = false
+    @savePath = ""
+
     #The frame that stores teh verticle frame. 
     @parentFrame = FXHorizontalFrame.new(p, opts, x, y, width, height,     
      padLeft, padRight, padTop, padBottom)
@@ -240,36 +243,43 @@ class Canvas
           end
         end
         index = index - 1
+
       end
       sdc.end
     end
       
     def createImage()
-      newImage = FXPNGImage.new(@parentApp, nil, @canvasWidth, @canvasHeight)
-      newImage.create                 #initializes the image object.
-      newImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
-      dc = FXDCWindow.new(newImage)
-      dc.foreground = FXRGB(255,255,255)
-      dc.fillRectangle(0,0, @canvasWidth, @canvasHeight)
-      dc.end
-      @imageArray.push(newImage)      #push the image into the imageArray for storage.
-      @layerArray.push(false)
-      @dirtyArray.push(false)
-      puts("Create image")
-    end
-    
-    def resizeCanvas()
-      
-      index = @layerArray.length()
-      while index >= 0
-        sdc = FXDCWindow.new(@imageArray[index])
-        if @dirtyArray[index] == true
-          sdc.fillRectangle(0,0, @canvas.width, @canvas.height)
-        end
-        index = index - 1
+      i = 0
+      while (i < 5) do
+        newImage = FXPNGImage.new(@parentApp, nil, @canvasWidth, @canvasHeight)
+        newImage.create                 #initializes the image object.
+        newImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
+        dc = FXDCWindow.new(newImage)
+        dc.foreground = FXRGB(255,255,255)
+        dc.fillRectangle(0,0, @canvasWidth, @canvasHeight)
+        dc.end
+        @imageArray.push(newImage)      #push the image into the imageArray for storage.
+        @layerArray.push(false)
+        @dirtyArray.push(false)
+        puts("Create image")
+        i = i + 1
+
       end
       sdc.end
-
+    end
+    
+    def resizeCanvas(w,h)
+      
+      @canvasHeight = h             #Set the canvas height
+      @canvasWidth = w              #Set the canvas width
+      
+      @layerArray = Array.new       #Reset the layer array
+      @imageArray = Array.new       #Reset the image array
+      @dirtyArray = Array.new       #Reset the dirty array
+      @activeIndex = 0              #Reset the active index
+      createImage()                 #Push a blank image data.
+      @activeImage = @imageArray[@activeIndex]  #Update active index to default.
+      @canvas.update                #Update the draw canvas to reflect changes.
     end
     
     def newCanvas
@@ -282,8 +292,58 @@ class Canvas
       @canvas.update                #Update the draw canvas to reflect changes.
     end
     
+
+    def clear(i)
+      newImage = FXPNGImage.new(@parentApp, nil, @canvasWidth, @canvasHeight)
+      newImage.create                 #initializes the image object.
+      newImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
+      dc = FXDCWindow.new(newImage)
+      dc.foreground = FXRGB(255,255,255)
+      dc.fillRectangle(0,0, @canvasWidth, @canvasHeight)
+      dc.end
+      @imageArray[i] = newImage
+    end
+    
+    def setActiveIndex(i)
+      @activeIndex = i;
+      @activeImage = @imageArray[@activeIndex]
+    end
+    
+    def load
+      loadDialog = FXFileDialog.new(@parent, "Load PNG Image")
+      if loadDialog != 0
+        FXFileStream.open(loadDialog.filename, FXStreamLoad) do |infile|
+          @imageArray[@activeIndex].loadPixels(infile)
+        end
+      end
+    end
+    
+    def quickSave
+      sdc = FXDCWindow.new(@exportImage)
+      sdc.foreground = FXRGB(255, 255, 255)
+      sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
+      
+      index = @layerArray.length()
+      while index >= 0
+        if @dirtyArray[index] == true
+          sdc.drawImage(@imageArray[index], 0, 0)
+        end
+        index = index - 1
+      end
+      sdc.end
+      
+      if @saved
+        File.open(@savePath, "PIE Image") do |io|
+          @exportImage.restore
+          @exportImage.savePixels(io)
+        end
+      end
+      return 1
+    end
+    
     def save
-      #sdc = FXDCWindow.new(@exportImage, event)
+      
+
       sdc = FXDCWindow.new(@exportImage)
       sdc.foreground = FXRGB(255, 255, 255)
       sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
@@ -302,6 +362,8 @@ class Canvas
         FXFileStream.open(saveDialog.filename, FXStreamSave) do |outfile|
           @exportImage.restore
           @exportImage.savePixels(outfile)
+          @savePath = saveDialog.directory
+
         end
       end
       return 1
