@@ -29,7 +29,7 @@ class Canvas
     
     @saved = false
     @savePath = ""
-    
+
     #The frame that stores teh verticle frame. 
     @parentFrame = FXHorizontalFrame.new(p, opts, x, y, width, height,     
      padLeft, padRight, padTop, padBottom)
@@ -243,6 +243,7 @@ class Canvas
           end
         end
         index = index - 1
+
       end
       sdc.end
     end
@@ -262,7 +263,9 @@ class Canvas
         @dirtyArray.push(false)
         puts("Create image")
         i = i + 1
+
       end
+      sdc.end
     end
     
     def resizeCanvas(w,h)
@@ -277,7 +280,6 @@ class Canvas
       createImage()                 #Push a blank image data.
       @activeImage = @imageArray[@activeIndex]  #Update active index to default.
       @canvas.update                #Update the draw canvas to reflect changes.
-
     end
     
     def newCanvas
@@ -290,6 +292,7 @@ class Canvas
       @canvas.update                #Update the draw canvas to reflect changes.
     end
     
+
     def clear(i)
       newImage = FXPNGImage.new(@parentApp, nil, @canvasWidth, @canvasHeight)
       newImage.create                 #initializes the image object.
@@ -340,6 +343,7 @@ class Canvas
     
     def save
       
+
       sdc = FXDCWindow.new(@exportImage)
       sdc.foreground = FXRGB(255, 255, 255)
       sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
@@ -359,6 +363,7 @@ class Canvas
           @exportImage.restore
           @exportImage.savePixels(outfile)
           @savePath = saveDialog.directory
+
         end
       end
       return 1
