@@ -73,21 +73,11 @@ class MenuBar
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  
-            dialog = FXFileDialog.new(x, "Load a File") 
-            dialog.selectMode = SELECTFILE_EXISTING 
-            dialog.patternList = ["All Files (*)"]  
-            if dialog.execute != 0  
-            load_file(dialog.filename)  
-            end   
+            @canvasSaveMethod.load
         end
         #**************************************************************************
         fileLoad.connect(SEL_COMMAND) do  
-            dialog = FXFileDialog.new(x, "Load a File") 
-            dialog.selectMode = SELECTFILE_EXISTING 
-            dialog.patternList = ["All Files (*)"]  
-            if dialog.execute != 0  
-            load_file(dialog.filename)  
-            end   
+            @canvasSaveMethod.load 
         end  
         #**************************************************************************
         saveCmd.connect(SEL_COMMAND) do
@@ -103,7 +93,7 @@ class MenuBar
         end
         #**************************************************************************
         fileSave.connect(SEL_COMMAND) do
-            puts "quick save"
+            @canvasSaveMethod.quickSave
         end
         #**************************************************************************
         exitCmd.connect(SEL_COMMAND) do

@@ -310,6 +310,7 @@ class Canvas
     end
     
     def load
+      puts('loading PNG')
       loadDialog = FXFileDialog.new(@parent, "Load PNG Image")
       if loadDialog != 0
         FXFileStream.open(loadDialog.filename, FXStreamLoad) do |infile|
@@ -319,6 +320,7 @@ class Canvas
     end
     
     def quickSave
+      puts "quick save"
       sdc = FXDCWindow.new(@exportImage)
       sdc.foreground = FXRGB(255, 255, 255)
       sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
