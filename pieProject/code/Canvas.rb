@@ -245,7 +245,7 @@ class Canvas
         index = index - 1
 
       end
-      dc.end
+      sdc.end
     end
       
     def createImage()
