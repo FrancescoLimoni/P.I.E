@@ -265,7 +265,7 @@ class Canvas
         i = i + 1
 
       end
-      sdc.end
+      dc.end
     end
     
     def resizeCanvas(w,h)
