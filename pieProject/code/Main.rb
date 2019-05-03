@@ -81,8 +81,9 @@ if __FILE__ == $0
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 800, 400, 0, 0, 0, 0, app)
     canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
-    #add friend function to canvas and editor_window
+    #add canvas as a friend function to splashScreen and editor_window
     editor_window.canvaFriend(canvas_window)
+    splash_screen.canvasFreindFunction(canvas_window)
     
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,340, canvas_window)
     brush_window.backColor = "Gray69"

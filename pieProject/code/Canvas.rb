@@ -225,6 +225,14 @@ class Canvas
    def setDrawColorViaRGBObject(color)
      @drawColor = color
    end
+
+   def getCanvasWidth
+    return @canvasWidth
+   end
+
+   def getCanvasHeight
+    return @canvasHeight
+   end
    
    def onCanvasRepaint(sender, sel, event)
       sdc = FXDCWindow.new(@canvas, event)
@@ -269,7 +277,7 @@ class Canvas
     end
     
     def resizeCanvas(w,h)
-      
+      puts(w,h)
       @canvasHeight = h             #Set the canvas height
       @canvasWidth = w              #Set the canvas width
       
