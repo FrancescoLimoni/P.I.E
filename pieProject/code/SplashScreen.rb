@@ -51,17 +51,17 @@ class SplashScreen < FXPacker
     #get access for canvas class
     def canvasFreindFunction(canvasRef)
       @canvasRefrance = canvasRef
-      #setDimentions
+      #setDimensions
     end
 
     #get defult height and width that is defined in canvas constructor
-    def setDimentions
+    def setDimensions
       @intTargetX = @canvasRefrance.getCanvasWidth
       @intTargetY = @canvasRefrance.getCanvasHeight
     end
 
     #call resize method from canvas cllass
-    def setCavasSize
+    def setCanvasSize
       if @intTargetX.to_s.to_i > @canvasRefrance.getCanvasWidth.to_s.to_i and @intTargetY.to_s.to_i > @canvasRefrance.getCanvasHeight.to_s.to_i
         puts('setting new dimetions')
         @canvasRefrance.resizeCanvas(@intTargetX.to_s.to_i,@intTargetY.to_s.to_i)
@@ -80,6 +80,7 @@ class SplashScreen < FXPacker
 
     end
 
+    #show all elements of the app
     def showElements 
       @hideElements.each do |element|
         element.show
@@ -87,6 +88,7 @@ class SplashScreen < FXPacker
       @resizeHack.resize(800,500)
     end
 
+    #hide all elements of app except of splashscreen elements
     def hideElements 
       @hideElements.each do |element|
         element.hide
@@ -98,17 +100,26 @@ class SplashScreen < FXPacker
     def forFriendfunctions
       @status = false
       self.hide
-
       showElements
     end
-    btn.connect(SEL_COMMAND) do
 
+    btn.connect(SEL_COMMAND) do
+      toggleShowSplashScreen
+    end
+
+  def toggleShowSplashScreen
+    if @status == false
+      @status = true
+      self.show
+      #setCanvasSize
+      hideElements
+      @resizeHack.resize(400,400)
+    else 
       @status = false
       self.hide
-      
-      setCavasSize
+      setCanvasSize
       showElements
-
+    end
   end
 
   resizeBtn.connect(SEL_COMMAND) do
