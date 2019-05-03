@@ -360,9 +360,10 @@ class Canvas
       sdc.end
       
       if @saved
-        File.open(@savePath, "PIE Image") do |io|
+        
+        FXFileStream.open(@savePath, FXStreamSave) do |outfile|
           @exportImage.restore
-          @exportImage.savePixels(io)
+          @exportImage.savePixels(outfile)
         end
       end
       return 1
@@ -390,7 +391,9 @@ class Canvas
           @exportImage.restore
           @exportImage.savePixels(outfile)
           @saved = true
-          @savePath = saveDialog.directory
+          temp = saveDialog.filename
+          @savePath = File.basename(temp)
+          puts(@savePath)
 
         end
       end
