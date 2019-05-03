@@ -38,7 +38,7 @@ class Canvas
     0, 0, 0, 0, 0, 0, 0, 0) 
     
     #Image stores the image data that is saved.
-    @exportImage = FXPNGImage.new(app, nil, width, height)
+    @exportImage = FXPNGImage.new(app, nil, @canvasWidth, @canvasHeight)
     @exportImage.create                 #initializes the image object.
     @exportImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
     
@@ -52,74 +52,75 @@ class Canvas
    
     #On creation, connect to the SEL_Paint handler. Every time the canvas changes, the canvas is repainted.
     @canvas.connect(SEL_PAINT, method(:onCanvasRepaint))
-    
+ 
     @canvas.resize(@canvasWidth, @canvasHeight)  #Sets the canvas to the default width and height.
     
     #Event handler that checks for left mouse button depression. 
     @canvas.connect(SEL_LEFTBUTTONPRESS) do |sender, sel, event|
       
-      @canvas.grab                  #grabs the canvas. Windows stores mouse data when mouse is inside canvas.
-      @mouseDown = true             #The mouse is depressed. Set mouseDown to true.
+    @canvas.grab                  #grabs the canvas. Windows stores mouse data when mouse is inside canvas.
+    @mouseDown = true             #The mouse is depressed. Set mouseDown to true.
       
-      # Get device context for the canvas
-        dc = FXDCWindow.new(@activeImage)
+    #Get device context for the canvas
+    dc = FXDCWindow.new(@activeImage)
 
-        # Set the foreground color for drawing
-        dc.foreground = @drawColor
-        #dc.fillRectangle(event.win_x, event.win_y, 2, 2)
+    # Set the foreground color for drawing
+    dc.foreground = @drawColor
+    #dc.fillRectangle(event.win_x, event.win_y, 2, 2)
       
-      if @mouseDown                 #make sure mouse is down.
-        if @brushSize == 1 || @brushSize == 2 || @brushSize == 3
-          dc.drawLine(event.last_x, event.last_y, event.win_x, event.win_y)
-        end
-        if @brushSize == 2
+    if @mouseDown                 #make sure mouse is down.
+    if @brushSize == 1 || @brushSize == 2 || @brushSize == 3
+      dc.drawLine(event.last_x, event.last_y, event.win_x, event.win_y)
+    end
+    if @brushSize == 2
           
-          i=0
-          while i < 10
-              dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
-              dc.drawLine(event.last_x, event.last_y+i, event.win_x, event.win_y+i)
-              dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
-              dc.drawLine(event.last_x+i, event.last_y+i, event.win_x, event.win_y)
-              dc.drawLine(event.last_x, event.last_y, event.win_x+i, event.win_y+i)
-              dc.drawLine(event.last_x+i, event.last_y, event.win_x, event.win_y+i)
-              dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y)
-              dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y+i)
-              dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y)
-              i += 1
-           end
+    i=0
+      while i < 10
+        dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
+        dc.drawLine(event.last_x, event.last_y+i, event.win_x, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y+i, event.win_x, event.win_y)
+        dc.drawLine(event.last_x, event.last_y, event.win_x+i, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y, event.win_x, event.win_y+i)
+        dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y)
+        dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y)
+          i += 1
+      end
+     end
+     
+     if @brushSize == 3 || @brushSize == 5
+       i=0
+       while i < 30
+        dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
+        dc.drawLine(event.last_x, event.last_y+i, event.win_x, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y+i, event.win_x, event.win_y)
+        dc.drawLine(event.last_x, event.last_y, event.win_x+i, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y, event.win_x, event.win_y+i)
+        dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y)
+        dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y+i)
+        dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y)
+        i += 1
+       end
+      end
+      if @brushSize == 4
+        dc.foreground = @drawColor
+        dc.fillRectangle(event.rect.x, event.rect.y, event.rect.w + @canvas.width,  event.rect.h + @canvas.height)
+      end
+      if @brushSize == 6
+        i=0
+        while i < 10
+          dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
+            i += 1
         end
-        if @brushSize == 3 || @brushSize == 5
-            i=0
-            while i < 30
-               dc.drawLine(event.last_x+i, event.last_y, event.win_x+i, event.win_y)
-               dc.drawLine(event.last_x, event.last_y+i, event.win_x, event.win_y+i)
-               dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
-               dc.drawLine(event.last_x+i, event.last_y+i, event.win_x, event.win_y)
-               dc.drawLine(event.last_x, event.last_y, event.win_x+i, event.win_y+i)
-               dc.drawLine(event.last_x+i, event.last_y, event.win_x, event.win_y+i)
-               dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y)
-               dc.drawLine(event.last_x, event.last_y+i, event.win_x+i, event.win_y+i)
-               dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y)
-               i += 1
-             end
-        end
-        if @brushSize == 4
-          dc.foreground = @drawColor
-          dc.fillRectangle(event.rect.x, event.rect.y, event.rect.w + @canvas.width,  event.rect.h + @canvas.height)
-        end
-        if @brushSize == 6
-            i=0
-            while i < 10
-                dc.drawLine(event.last_x+i, event.last_y+i, event.win_x+i, event.win_y+i)
-                 i += 1
-            end
-        end
+      end
 
-        # We have drawn something, so now the canvas is dirty
-        @dirtyArray[@activeIndex] = true
-        @canvas.update
-        # Release the DC immediately
-        dc.end
+      # We have drawn something, so now the canvas is dirty
+      @dirtyArray[@activeIndex] = true
+      @canvas.update
+      # Release the DC immediately
+      dc.end
       end
     end
     
@@ -225,12 +226,21 @@ class Canvas
    def setDrawColorViaRGBObject(color)
      @drawColor = color
    end
+
+   def getCanvasWidth
+    return @canvasWidth
+   end
+
+   def getCanvasHeight
+    return @canvasHeight
+   end
    
    def onCanvasRepaint(sender, sel, event)
       sdc = FXDCWindow.new(@canvas, event)
-      sdc.foreground = FXRGB(255, 255, 255)
-      sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
       if !@dirtyArray[@activeIndex]
+        sdc.foreground = FXRGB(255, 255, 255)
+        sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
+
         dc = FXDCWindow.new(@activeImage)
         dc.fillRectangle(0, 0, @canvas.width, @canvas.height)
         dc.end   
@@ -258,6 +268,7 @@ class Canvas
         dc.foreground = FXRGB(255,255,255)
         dc.fillRectangle(0,0, @canvasWidth, @canvasHeight)
         dc.end
+        newImage.restore
         @imageArray.push(newImage)      #push the image into the imageArray for storage.
         @layerArray.push(false)
         @dirtyArray.push(false)
@@ -265,14 +276,17 @@ class Canvas
         i = i + 1
 
       end
-      sdc.end
+      dc.end
     end
     
     def resizeCanvas(w,h)
-      
+      puts(w,h)
       @canvasHeight = h             #Set the canvas height
       @canvasWidth = w              #Set the canvas width
-      
+      @canvas.resize(h,w)
+      @exportImage = FXPNGImage.new(@parentApp, nil, @canvasWidth, @canvasHeight)
+      @exportImage.create                 #initializes the image object.
+      @exportImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
       @layerArray = Array.new       #Reset the layer array
       @imageArray = Array.new       #Reset the image array
       @dirtyArray = Array.new       #Reset the dirty array
@@ -287,6 +301,9 @@ class Canvas
       @imageArray = Array.new       #Reset the image array
       @dirtyArray = Array.new       #Reset the dirty array
       @activeIndex = 0              #Reset the active index
+      @exportImage = FXPNGImage.new(@parentApp, nil, @canvasWidth, @canvasHeight)
+      @exportImage.create                 #initializes the image object.
+      @exportImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
       createImage()                 #Push a blank image data.
       @activeImage = @imageArray[@activeIndex]  #Update active index to default.
       @canvas.update                #Update the draw canvas to reflect changes.
@@ -310,15 +327,25 @@ class Canvas
     end
     
     def load
+      puts('loading PNG')
       loadDialog = FXFileDialog.new(@parent, "Load PNG Image")
-      if loadDialog != 0
+      if loadDialog.execute != 0
         FXFileStream.open(loadDialog.filename, FXStreamLoad) do |infile|
-          @imageArray[@activeIndex].loadPixels(infile)
+          tempImage = FXPNGImage.new(@parentApp,nil, @canvasWidth, @canvasHeight)
+          tempImage.loadPixels(infile)
+          if tempImage.width != @canvasWidth || tempImage.height != @canvasheight
+            tempImage.scale(@canvasWidth, @canvasHeight)
+          end
+          
+          @activeImage.setPixels(tempImage.pixel_string())
+          @activeImage.render
+          @canvas.update
         end
       end
     end
     
     def quickSave
+      puts "quick save"
       sdc = FXDCWindow.new(@exportImage)
       sdc.foreground = FXRGB(255, 255, 255)
       sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
@@ -346,7 +373,7 @@ class Canvas
 
       sdc = FXDCWindow.new(@exportImage)
       sdc.foreground = FXRGB(255, 255, 255)
-      sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
+      sdc.fillRectangle(0, 0, @canvasWidth, @canvasHeight)
       
       index = @layerArray.length()
       while index >= 0
@@ -362,6 +389,7 @@ class Canvas
         FXFileStream.open(saveDialog.filename, FXStreamSave) do |outfile|
           @exportImage.restore
           @exportImage.savePixels(outfile)
+          @saved = true
           @savePath = saveDialog.directory
 
         end
