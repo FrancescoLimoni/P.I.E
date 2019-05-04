@@ -136,15 +136,15 @@ class ColorPanel < FXPacker
   end
   
   def loadIcon(filename)
-      begin
-        filename = File.join("icons", filename)
-        icon = nil
-        File.open(filename, "rb") do |f|
-          icon = FXPNGIcon.new(getApp(), f.read)
-        end
-        icon
-      rescue
-        raise RuntimeError, "Couldn't load icon: #{filename}"
+    begin
+      filename = File.join("icons", filename)
+      icon = nil
+      File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/"+filename, "rb") do |f|
+        icon = FXPNGIcon.new(getApp(), f.read)
       end
+      icon
+    rescue
+      raise RuntimeError, "Couldn't load icon: #{filename}"
     end
+  end
 end

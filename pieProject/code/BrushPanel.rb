@@ -106,7 +106,7 @@ end
     begin
       filename = File.join("icons", filename)
       icon = nil
-      File.open(filename, "rb") do |f|
+      File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/"+filename, "rb") do |f|
         icon = FXPNGIcon.new(getApp(), f.read)
       end
       icon

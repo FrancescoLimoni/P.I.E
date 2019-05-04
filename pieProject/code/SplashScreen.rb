@@ -11,8 +11,9 @@ class SplashScreen < FXPacker
     #in order to make the elments re-apear, the window must be resized as well as invoking .show method
     @resizeHack = nil
     #default canvas size
-    @intTargetX = FXDataTarget.new(900)
-    @intTargetY = FXDataTarget.new(850)
+    @minDimensions = 50
+    @intTargetX = FXDataTarget.new(720)
+    @intTargetY = FXDataTarget.new(480)
     @canvasRefrance = nil
 
     splashIcon = loadIcon("pie.png",0)
@@ -62,11 +63,12 @@ class SplashScreen < FXPacker
 
     #call resize method from canvas cllass
     def setCanvasSize
-      if @intTargetX.to_s.to_i > @canvasRefrance.getCanvasWidth.to_s.to_i and @intTargetY.to_s.to_i > @canvasRefrance.getCanvasHeight.to_s.to_i
+      if @intTargetX.to_s.to_i > 20 and @intTargetY.to_s.to_i > 20
         puts('setting new dimetions')
-        @canvasRefrance.resizeCanvas(@intTargetX.to_s.to_i,@intTargetY.to_s.to_i)
+        @canvasRefrance.resizeCanvas(@intTargetY.to_s.to_i,@intTargetX.to_s.to_i)
       else 
         puts('setting defult dimentions')
+        @canvasRefrance.resizeCanvas(@minDimensions,@minDimensions)
       end
     end
 
@@ -132,7 +134,7 @@ class SplashScreen < FXPacker
     begin
       filename = File.join("icons", filename)
       icon = nil
-      File.open(filename, "rb") do |f|
+      File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/"+filename, "rb") do |f|
         icon = FXPNGIcon.new(getApp(), f.read)
         if size != 0
           icon.scale(size,size)

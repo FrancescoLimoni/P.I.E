@@ -16,7 +16,7 @@ class MenuBar
         #load icons functions ==================================================
         def readIcon(scope,path)
             icon = nil
-            File.open(path, "rb") do |io|
+            File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/"+path, "rb") do |io|
             icon = FXPNGIcon.new(scope, io.read)
             icon.scale(25,25)
             end

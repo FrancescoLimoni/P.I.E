@@ -1,4 +1,4 @@
-$LOAD_PATH << '.'
+File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}
 
 require 'Canvas.rb'
 require 'BrushPanel.rb'
