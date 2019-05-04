@@ -12,26 +12,43 @@ include Fox
 class LPFields
   attr_accessor :frameH, :hideB, :label, :binB
 
-  def initialize(frameV, layers)
+  def initialize(frameV, layers, canvas)
     isHidden = false
-    #hideBI = loadIcon("hideIcon20.png")
-    #binBI = loadIcon("binIcon24.png")
-
+    @index = 0
+    @activeIndex = 0
+    @parentLayer = nil
     frameH = FXHorizontalFrame.new(frameV, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|FRAME_LINE)
+    
     hideB = FXButton.new(frameH, "H", nil, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_LEFT|LAYOUT_CENTER_Y)
     buttonCustomization(hideB, true, false)
+    
+    selectB = FXButton.new(frameH, "S", nil, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_LEFT|LAYOUT_CENTER_Y)
+    buttonCustomization(selectB, true, false)
+    
     label = FXLabel.new(frameH, 'Layer ' + (layers.size + 1).to_s, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
-    binB = FXButton.new(frameH, "D", nil, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|LAYOUT_CENTER_Y)
+    
+    binB = FXButton.new(frameH, "C", nil, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|LAYOUT_CENTER_Y)
     buttonCustomization(binB, true, false)
-
+   
+    @friendRef = canvas
+    
     #BUTTON ACTION SECTION
     hideB.connect(SEL_COMMAND) do|sender, sel, data|
       isHidden = hideSection(frameH, hideB, label, binB, isHidden)
+      @friendRef.setHidden(@index)
     end
     binB.connect(SEL_COMMAND) do|sender, sel, data|
-      index = label.getText[-1]
-      frameV.removeChild(frameH)
-      layers.delete_at((index.to_i)-1)
+      if @index == @activeIndex
+        @friendRef.clear(@index)
+      end
+    end
+    selectB.connect(SEL_COMMAND) do |sender, sel, data|
+    i = 0
+    while i < 5
+      @parentLayer[i].setActiveIndex(@index)
+      i = i + 1
+    end
+    @friendRef.setActiveIndex(@index)
     end
   end
 
@@ -84,17 +101,29 @@ class LPFields
 
     return isHidden
   end
+  
+  def setIndex(i)
+    @index = i
+  end
+  
+  def setActiveIndex(index)
+    @activeIndex = index
+  end
+  
+  def parentLayer(layer)
+    @parentLayer = layer
+  end
 end
 
 class LayerPanel < FXPacker
-  def initialize(p, opts, x, y, width, height)
-    super(p,  opts, x, y, width, height)
+  def initialize(p, opts, x, y, width, height, canvas)
+    super(p,opts, x, y, width, height)
 
-    #images for layer buttons
-    plusB = loadIcon("plusIcon20.png")
-    #plusB = loadIcon("filesave.png")
     @layers = Array.new
-
+    @isActiveLayer = [true, false, false]
+    @activeIndex = 0
+    @friendref = canvas
+    
     packer = FXPacker.new(self, opts =  LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT)
     packerCustomization(packer)
 
@@ -104,34 +133,51 @@ class LayerPanel < FXPacker
     frameV = FXVerticalFrame.new(groupBox, :opts => LAYOUT_SIDE_BOTTOM)
     frameV.backColor = "Gray69"
 
-    plusB = FXButton.new(frameV, nil, plusB, :opts => LAYOUT_RIGHT)
-    buttonCustomization(plusB, false, true)
+    layerFields1 = LPFields.new(frameV, @layers, @friendref)
+    layerFields1.setIndex(0)
+    #layerFields1.classRef(@friendref)
+    @layers.push(layerFields1)
+    
+    layerFields2 = LPFields.new(frameV, @layers, @friendref)
+    layerFields2.setIndex(1)
+   # layerFields2.classRef(@friendref)
+    @layers.push(layerFields2)
+    
+    layerFields3 = LPFields.new(frameV, @layers, @friendref)
+    layerFields3.setIndex(2)
+    #layerFields3.classRef(@friendref)
+    @layers.push(layerFields3)
+    
+    layerFields4 = LPFields.new(frameV, @layers, @friendref)
+    layerFields4.setIndex(3)
+    #layerFields4.classRef(@friendref)
+    @layers.push(layerFields4)
+    
+    layerFields5 = LPFields.new(frameV, @layers, @friendref)
+    layerFields5.setIndex(4)
+    #layerFields5.classRef(@friendref)
+    @layers.push(layerFields5)
 
-    layerFields = LPFields.new(frameV, @layers)
-    @layers.push(layerFields)
-    layerFields = LPFields.new(frameV, @layers)
-    @layers.push(layerFields)
-
-    #BUTTON ACTION SECTION
-    plusB.connect(SEL_COMMAND) do | seler, sel, data|
-      layerFields = LPFields.new(frameV, @layers)
-      @layers.push(layerFields)
+    hideLabels
+    
+    i = 0
+    while i < 5
+     @layers[i].setActiveIndex(0)
+     @layers[i].parentLayer(@layers)
+     i = i + 1
     end
-
-
   end
 
   #METHODS SECTION
-  def loadIcon(iconName)
-    begin
-      iconName = File.join("icons", iconName)
-      icon = nil
-      File.open(iconName, "rb") do |f|
-        icon = FXPNGIcon.new(getApp(), f.read)
+  def hideLabels()
+
+    for item in @isActiveLayer
+      #puts(item)
+      if item == true
+        puts("true")
+      else
+        puts("false")
       end
-      icon
-    rescue
-      raise RuntimeError, "Couldn't load icon: #{iconName}"
     end
   end
 
@@ -157,4 +203,13 @@ class LayerPanel < FXPacker
     end
   end
 
+
+  def setActiveIndex(index)
+    @activeIndex = index
+    i = 0
+    while i < 5
+      @layers[i].setActiveIndex(index)
+      i = i + 1
+    end
+  end
 end

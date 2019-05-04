@@ -26,7 +26,7 @@ class EditorWindow < FXMainWindow
     show(PLACEMENT_SCREEN)
   end
 
-  #add friend funtion from splashscreen to menuBar
+  #add friend funtion from splashscreen to menuBar\
   def editMenuBar(splashScreen)
     puts 'creating new project'
     @menuBar.splashScreenFriendfunction(splashScreen)
@@ -48,9 +48,8 @@ if __FILE__ == $0
     icon
 
     #call editor_window constructor
-    editor_window = EditorWindow.new(app,icon,400,400)
+    editor_window = EditorWindow.new(app,icon,600,600)
     editor_window.backColor = "Gray20"
-    
     #groupBoxV = FXGroupBox.new(packer, nil, :opts => FRAME_RIDGE | GROUPBOX_NORMAL)
     #rightVFrame = FXHorizontalFrame.new(groupBoxV) 
     
@@ -93,9 +92,11 @@ if __FILE__ == $0
     color_window.backColor = "Gray69"
     splash_screen.addHideElement(color_window,editor_window)
 
-    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FILL_Y | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120)
+    layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FILL_Y | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120, canvas_window)
     layerPanel.backColor = "Gray69"
+    #layerPanel.connectionWithCanvasClass(canvas_window)
     splash_screen.addHideElement(layerPanel,editor_window)
+
 
   FXToolTip.new(app)
   app.create

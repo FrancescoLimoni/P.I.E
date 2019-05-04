@@ -245,8 +245,14 @@ class Canvas
         dc.fillRectangle(0, 0, @canvas.width, @canvas.height)
         dc.end   
       end
+      
       index = @layerArray.length()
       while index >= 0
+        if index == @layerArray.length()
+          sdc.foreground = FXRGB(255, 255, 255)
+          sdc.fillRectangle(0, 0, @canvas.width, @canvas.height)
+        end
+       
         if @layerArray[index] == false
           if @dirtyArray[index] == true
             sdc.drawImage(@imageArray[index], 0, 0)
@@ -277,6 +283,7 @@ class Canvas
 
       end
       dc.end
+      @activeImage = @imageArray[0]
     end
     
     def resizeCanvas(w,h)
@@ -319,6 +326,8 @@ class Canvas
       dc.fillRectangle(0,0, @canvasWidth, @canvasHeight)
       dc.end
       @imageArray[i] = newImage
+      @canvas.update
+      @activeImage = @imageArray[@activeIndex]  #Update active index to default.
     end
     
     def setActiveIndex(i)
@@ -360,17 +369,30 @@ class Canvas
       sdc.end
       
       if @saved
-        File.open(@savePath, "PIE Image") do |io|
+        
+        FXFileStream.open(@savePath, FXStreamSave) do |outfile|
           @exportImage.restore
-          @exportImage.savePixels(io)
+          @exportImage.savePixels(outfile)
         end
       end
       return 1
     end
     
+    def updateCanvas
+      canvas.update
+    end
+    
+    def setHidden(index)
+      if @layerArray[index] == false
+        @layerArray[index] = true
+      else
+        @layerArray[index] = false
+      end
+      @canvas.update
+    end
+    
     def save
       
-
       sdc = FXDCWindow.new(@exportImage)
       sdc.foreground = FXRGB(255, 255, 255)
       sdc.fillRectangle(0, 0, @canvasWidth, @canvasHeight)
@@ -390,7 +412,9 @@ class Canvas
           @exportImage.restore
           @exportImage.savePixels(outfile)
           @saved = true
-          @savePath = saveDialog.directory
+          temp = saveDialog.filename
+          @savePath = File.basename(temp)
+          puts(@savePath)
 
         end
       end
