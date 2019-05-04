@@ -122,11 +122,11 @@ class LayerPanel < FXPacker
   end
 
   #METHODS SECTION
-  def loadIcon(iconName)
+ def loadIcon(iconName)
     begin
       iconName = File.join("icons", iconName)
       icon = nil
-      File.open(iconName, "rb") do |f|
+      File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/"+iconName, "rb") do |f|
         icon = FXPNGIcon.new(getApp(), f.read)
       end
       icon

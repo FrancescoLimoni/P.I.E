@@ -4,8 +4,7 @@ class MenuBar
 
         @splashScreenFriendObject = nil
         @canvasSaveMethod = nil
-        @friendObject = nil
-  
+
         # set up menu LayerPanel properties ======================================
 
         menuBar = FXMenuBar.new(x, y | z)  
@@ -15,9 +14,9 @@ class MenuBar
         about = FXMenuPane.new(x)  #self refers to the TextEditor window
 
         #load icons functions ==================================================
-        def readIcon(scope,path)
+    def readIcon(scope,path)
             icon = nil
-            File.open(path, "rb") do |io|
+            File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/"+path, "rb") do |io|
             icon = FXPNGIcon.new(scope, io.read)
             icon.scale(25,25)
             end
@@ -48,64 +47,55 @@ class MenuBar
             #under 'About' tab
         aboutCmd = FXMenuCommand.new(about, "contact us") 
         
-
         #splash screen friend function=================================================
         def splashScreenFriendfunction(splahsScreenObject)
             @splashScreenFriendObject = splahsScreenObject
         end
-        #splash screen friend function=================================================
+        #canvas friend function=================================================
         def canvasSaveFriendfunction(canvasObject)
             @canvasSaveMethod = canvasObject
         end
         #connect sub menue Items to functions =====================================
         fileNew.connect(SEL_COMMAND) do
             # 'forFriendfunctions' is defined in the splashScreen class
-            @splashScreenFriendObject.forFriendfunctions
+            #@splashScreenFriendObject.forFriendfunctions
+            @splashScreenFriendObject.toggleShowSplashScreen
 
+            puts('creating new canvas')
+            @canvasSaveMethod.newCanvas
         end
         #**************************************************************************
         newCmd.connect(SEL_COMMAND) do
-            #@txt.text = ""
+            # 'forFriendfunctions' is defined in the splashScreen class
+            #@splashScreenFriendObject.forFriendfunctions
+            @splashScreenFriendObject.toggleShowSplashScreen
 
-            @splashScreenFriendObject.forFriendfunctions
-
+            puts('creating new canvas')
+            @canvasSaveMethod.newCanvas
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  
-            dialog = FXFileDialog.new(x, "Load a File") 
-            dialog.selectMode = SELECTFILE_EXISTING 
-            dialog.patternList = ["All Files (*)"]  
-            if dialog.execute != 0  
-            load_file(dialog.filename)  
-            end   
+            @canvasSaveMethod.load
         end
         #**************************************************************************
         fileLoad.connect(SEL_COMMAND) do  
-            dialog = FXFileDialog.new(x, "Load a File") 
-            dialog.selectMode = SELECTFILE_EXISTING 
-            dialog.patternList = ["All Files (*)"]  
-            if dialog.execute != 0  
-            load_file(dialog.filename)  
-            end   
+            @canvasSaveMethod.load 
         end  
         #**************************************************************************
         saveCmd.connect(SEL_COMMAND) do
-            dialog = FXFileDialog.new(x, "Save a File")  
-            dialog.selectMode = SELECTFILE_EXISTING  
-            dialog.patternList = ["All Files (*)"]  
-            if dialog.execute != 0  
-                save_file(dialog.filename)  
-            end
+            #save method defined in canvas
+            @canvasSaveMethod.save
+            puts ('long save')
         end
         #**************************************************************************
         fileSave_s.connect(SEL_COMMAND) do
-
+            #save method defined in canvas
             @canvasSaveMethod.save
             puts ('long save')
         end
         #**************************************************************************
         fileSave.connect(SEL_COMMAND) do
-            puts "quick save"
+            @canvasSaveMethod.quickSave
         end
         #**************************************************************************
         exitCmd.connect(SEL_COMMAND) do

@@ -1,4 +1,4 @@
-$LOAD_PATH << '.'
+File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}
 
 require 'Canvas.rb'
 require 'BrushPanel.rb'
@@ -31,11 +31,9 @@ class EditorWindow < FXMainWindow
     puts 'creating new project'
     @menuBar.splashScreenFriendfunction(splashScreen)
   end
-
   def canvaFriend(canvas)
     @menuBar.canvasSaveFriendfunction(canvas)
   end
-
 end
 
 
@@ -44,7 +42,7 @@ if __FILE__ == $0
 
     #load pie icon
     icon = nil
-    File.open("icons/pie.png", "rb") do |io|
+    File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/icons/pie.png", "rb") do |io|
       icon = FXPNGIcon.new(app, io.read)
     end
     icon
@@ -83,16 +81,15 @@ if __FILE__ == $0
     canvas_window = Canvas.new(canvasPacker, LAYOUT_SIDE_TOP|LAYOUT_FILL_X|LAYOUT_FILL_Y, 0, 0, 800, 400, 0, 0, 0, 0, app)
     canvasPacker.backColor = "Gray69"
     splash_screen.addHideElement(canvasPacker,editor_window)
-
-    #add friend function to canvas and editor_window
+    #add canvas as a friend function to splashScreen and editor_window
     editor_window.canvaFriend(canvas_window)
-
+    splash_screen.canvasFreindFunction(canvas_window)
     
     brush_window = BrushPanel.new(brush_tool_bar.getToolBar,LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT,0,0,69,340, canvas_window)
     brush_window.backColor = "Gray69"
     splash_screen.addHideElement(brush_window,editor_window)
     
-    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 150, 280, canvas_window)
+    color_window = ColorPanel.new(color_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FIX_HEIGHT | LAYOUT_CENTER_X , 0, 0, 161, 240, canvas_window)
     color_window.backColor = "Gray69"
     splash_screen.addHideElement(color_window,editor_window)
 
@@ -105,3 +102,5 @@ if __FILE__ == $0
   app.run
   end
 end
+
+
