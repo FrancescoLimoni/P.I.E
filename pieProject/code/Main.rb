@@ -94,7 +94,7 @@ if __FILE__ == $0
 
     layerPanel = LayerPanel.new(layer_tool_bar.getToolBar, LAYOUT_FIX_WIDTH | LAYOUT_FILL_Y | LAYOUT_SIDE_BOTTOM | LAYOUT_RIGHT, 0,0, 161, 120, canvas_window)
     layerPanel.backColor = "Gray69"
-    #layerPanel.connectionWithCanvasClass(canvas_window)
+
     splash_screen.addHideElement(layerPanel,editor_window)
 
 

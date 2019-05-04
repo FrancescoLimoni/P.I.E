@@ -51,25 +51,27 @@ class MenuBar
         def splashScreenFriendfunction(splahsScreenObject)
             @splashScreenFriendObject = splahsScreenObject
         end
-        #splash screen friend function=================================================
+        #canvas friend function=================================================
         def canvasSaveFriendfunction(canvasObject)
             @canvasSaveMethod = canvasObject
         end
         #connect sub menue Items to functions =====================================
         fileNew.connect(SEL_COMMAND) do
             # 'forFriendfunctions' is defined in the splashScreen class
-            @splashScreenFriendObject.forFriendfunctions
-            @canvasSaveMethod.newCanvas
-
-        end
-        #**************************************************************************
-        newCmd.connect(SEL_COMMAND) do
-            #@txt.text = ""
-            @splashScreenFriendObject.forFriendfunctions
+            #@splashScreenFriendObject.forFriendfunctions
+            @splashScreenFriendObject.toggleShowSplashScreen
 
             puts('creating new canvas')
             @canvasSaveMethod.newCanvas
+        end
+        #**************************************************************************
+        newCmd.connect(SEL_COMMAND) do
+            # 'forFriendfunctions' is defined in the splashScreen class
+            #@splashScreenFriendObject.forFriendfunctions
+            @splashScreenFriendObject.toggleShowSplashScreen
 
+            puts('creating new canvas')
+            @canvasSaveMethod.newCanvas
         end
         #**************************************************************************
         loadCmd.connect(SEL_COMMAND) do  

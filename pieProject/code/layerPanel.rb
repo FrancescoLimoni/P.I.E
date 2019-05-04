@@ -14,9 +14,11 @@ class LPFields
 
   def initialize(frameV, layers, canvas)
     isHidden = false
+
     @index = 0
     @activeIndex = 0
     @parentLayer = nil
+
     frameH = FXHorizontalFrame.new(frameV, :opts => LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT|FRAME_LINE)
     
     hideB = FXButton.new(frameH, "H", nil, :opts => BUTTON_NORMAL|LAYOUT_SIDE_BOTTOM|LAYOUT_LEFT|LAYOUT_CENTER_Y)
@@ -38,6 +40,7 @@ class LPFields
       @friendRef.setHidden(@index)
     end
     binB.connect(SEL_COMMAND) do|sender, sel, data|
+
       if @index == @activeIndex
         @friendRef.clear(@index)
       end
@@ -49,6 +52,7 @@ class LPFields
       i = i + 1
     end
     @friendRef.setActiveIndex(@index)
+
     end
   end
 
@@ -116,14 +120,16 @@ class LPFields
 end
 
 class LayerPanel < FXPacker
+
   def initialize(p, opts, x, y, width, height, canvas)
     super(p,opts, x, y, width, height)
 
     @layers = Array.new
     @isActiveLayer = [true, false, false]
     @activeIndex = 0
+
     @friendref = canvas
-    
+
     packer = FXPacker.new(self, opts =  LAYOUT_SIDE_BOTTOM|LAYOUT_RIGHT)
     packerCustomization(packer)
 
@@ -132,6 +138,7 @@ class LayerPanel < FXPacker
 
     frameV = FXVerticalFrame.new(groupBox, :opts => LAYOUT_SIDE_BOTTOM)
     frameV.backColor = "Gray69"
+
 
     layerFields1 = LPFields.new(frameV, @layers, @friendref)
     layerFields1.setIndex(0)
@@ -166,6 +173,7 @@ class LayerPanel < FXPacker
      @layers[i].parentLayer(@layers)
      i = i + 1
     end
+
   end
 
   #METHODS SECTION
@@ -203,7 +211,6 @@ class LayerPanel < FXPacker
     end
   end
 
-
   def setActiveIndex(index)
     @activeIndex = index
     i = 0
@@ -211,5 +218,6 @@ class LayerPanel < FXPacker
       @layers[i].setActiveIndex(index)
       i = i + 1
     end
+
   end
 end
