@@ -42,7 +42,7 @@ if __FILE__ == $0
 
     #load pie icon
     icon = nil
-    File.open("icons/pie.png", "rb") do |io|
+    File.open(File.expand_path(File.dirname(__FILE__)).tap {|pwd| $LOAD_PATH.unshift(pwd) unless $LOAD_PATH.include?(pwd)}+"/icons/pie.png", "rb") do |io|
       icon = FXPNGIcon.new(app, io.read)
     end
     icon
