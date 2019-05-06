@@ -287,10 +287,11 @@ class Canvas
     end
     
     def resizeCanvas(w,h)
+      puts("resizing canvas")
       puts(w,h)
       @canvasHeight = h             #Set the canvas height
       @canvasWidth = w              #Set the canvas width
-      @canvas.resize(h,w)
+      @canvas.resize(w,h)
       @exportImage = FXPNGImage.new(@parentApp, nil, @canvasWidth, @canvasHeight)
       @exportImage.create                 #initializes the image object.
       @exportImage.resize(@canvasWidth, @canvasHeight)  #Sets the image to match canvas width and height
