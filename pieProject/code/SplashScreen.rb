@@ -12,8 +12,8 @@ class SplashScreen < FXPacker
     @resizeHack = nil
     #default canvas size
     @minDimensions = 50
-    @intTargetX = FXDataTarget.new(720)
-    @intTargetY = FXDataTarget.new(480)
+    @intTargetY = FXDataTarget.new(720)
+    @intTargetX = FXDataTarget.new(480)
     @canvasRefrance = nil
 
     splashIcon = loadIcon("pie.png",0)
@@ -40,9 +40,9 @@ class SplashScreen < FXPacker
     #resizeBtn.hide
     #input tedt field
     FXLabel.new(vframe2, "&Width", nil,LAYOUT_CENTER_Y)
-    FXTextField.new(vframe2, 4, @intTargetX, FXDataTarget::ID_VALUE,LAYOUT_CENTER_Y|FRAME_SUNKEN|FRAME_THICK|LAYOUT_FILL_ROW)
-    FXLabel.new(vframe2, "&Height", nil,LAYOUT_CENTER_Y)
     FXTextField.new(vframe2, 4, @intTargetY, FXDataTarget::ID_VALUE,LAYOUT_CENTER_Y|FRAME_SUNKEN|FRAME_THICK|LAYOUT_FILL_ROW)
+    FXLabel.new(vframe2, "&Height", nil,LAYOUT_CENTER_Y)
+    FXTextField.new(vframe2, 4, @intTargetX, FXDataTarget::ID_VALUE,LAYOUT_CENTER_Y|FRAME_SUNKEN|FRAME_THICK|LAYOUT_FILL_ROW)
 
 
     def getStatus
