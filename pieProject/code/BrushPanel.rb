@@ -25,7 +25,7 @@ class BrushPanel < FXPacker
 
     #Display images as clickable buttons#
 
-    vframe = FXGroupBox.new(self, "Brush Size", GROUPBOX_TITLE_CENTER|FRAME_RIDGE|LAYOUT_FILL)
+    vframe = FXGroupBox.new(self, "Brush", GROUPBOX_TITLE_CENTER|FRAME_RIDGE|LAYOUT_FILL)
     vframe.backColor = "Gray69"
 
     brush1 = FXButton.new(vframe, "\t1 x 1", b1, :opts => LAYOUT_CENTER_X)
