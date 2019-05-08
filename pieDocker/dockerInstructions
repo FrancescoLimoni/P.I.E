@@ -1,0 +1,5 @@
+#https://hub.docker.com/r/obitar/pie-app
+sudo docker pull obitar/pie-app:v1
+
+#this runs the app and gets access to the host's GUI
+obitar@omars-laptop:~$ sudo docker run --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" obitar/pie-app:v1
